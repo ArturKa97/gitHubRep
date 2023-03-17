@@ -5,6 +5,7 @@ import com.example.Backend.repositories.FoodProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -18,4 +19,13 @@ public class FoodProductServiceImpl implements FoodProductService{
     public List<FoodProduct> getAllProducts() {
         return foodProductRepository.getAllProducts();
     }
-}
+
+    @Override
+    public FoodProduct addProduct(FoodProduct foodProduct) {
+        return foodProductRepository.save(foodProduct);
+
+    }
+
+    }
+
+

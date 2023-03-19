@@ -29,6 +29,15 @@ function AppAppBar() {
             >
               {'Add Product'}
             </Button>
+            <Button
+                color="inherit"
+                variant="h6"
+                underline="none"
+                onClick={() => navigate("/foodproducts")}
+                sx={rightLink}
+            >
+              {'Food Products'}
+            </Button>
             <Link
               color="inherit"
               variant="h6"

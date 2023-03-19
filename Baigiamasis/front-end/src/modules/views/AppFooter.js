@@ -5,18 +5,18 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
+
 function Copyright() {
   return (
-    <React.Fragment>
+    <>
       {'© '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
-    </React.Fragment>
+    </>
   );
 }
-
 
 const LANGUAGES = [
   {
@@ -29,7 +29,7 @@ const LANGUAGES = [
   },
 ];
 
-export default function AppFooter() {
+const AppFooter = () => {
   return (
     <Typography
       component="footer"
@@ -75,3 +75,5 @@ export default function AppFooter() {
     </Typography>
   );
 }
+
+export default AppFooter;

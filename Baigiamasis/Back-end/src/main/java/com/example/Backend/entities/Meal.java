@@ -28,10 +28,19 @@ public class Meal {
     private String name;
 
     @NotBlank
-    @Column(name = "name")
+    @Column(name = "decription")
     private String description;
 
     @OneToMany(mappedBy = "meal" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FoodProduct> foodProducts = new ArrayList<>();
 
+    public void addProduct (FoodProduct foodProduct) {
+        foodProducts.add(foodProduct);
+        foodProduct.setMeal(this);
+    }
+
+    public void removeProduct (FoodProduct foodProduct) {
+        foodProducts.remove(foodProduct);
+        foodProduct.setMeal(null);
+    }
 }

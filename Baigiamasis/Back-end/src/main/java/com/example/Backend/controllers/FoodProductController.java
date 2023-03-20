@@ -7,9 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,4 +29,9 @@ public class FoodProductController {
     public FoodProduct addProduct (@RequestBody @Valid FoodProduct foodProduct) {
         return foodProductService.addProduct(foodProduct);
     }
+    @GetMapping("/{id}")
+    public Optional<FoodProduct> getProductById (@PathVariable(value = "id") Long id) {
+        return foodProductService.getProductById(id);
+    }
+
 }

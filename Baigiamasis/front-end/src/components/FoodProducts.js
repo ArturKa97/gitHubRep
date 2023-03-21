@@ -1,7 +1,7 @@
 import FoodProductCard from "./FoodProductCard";
 import Box from "@mui/material/Box";
 import * as React from 'react';
-import {useProducts} from "./api/productsApi";
+import {useProducts} from "../api/productsApi";
 
 const FoodProducts = () => {
 

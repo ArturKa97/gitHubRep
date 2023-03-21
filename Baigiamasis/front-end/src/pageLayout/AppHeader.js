@@ -12,7 +12,7 @@ const rightLink = {
   ml: 3,
 };
 
-function AppAppBar() {
+function AppHeader() {
   const navigate = useNavigate();
 
   return (
@@ -63,4 +63,4 @@ function AppAppBar() {
   );
 }
 
-export default AppAppBar;
+export default AppHeader;

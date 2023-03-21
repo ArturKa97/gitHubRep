@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import {Field, Form, Formik} from "formik";
 import {CircularProgress} from "@mui/material";
 import * as Yup from "yup";
+import {createProduct} from "../api/productsApi";
 
 const productValidation = Yup.object().shape({
         productName: Yup.string()
@@ -44,6 +45,7 @@ const productValidation = Yup.object().shape({
             .label("Fat")
     }
 )
+// const addProduct = createProduct;
 
 
 const AddProductForm = () => {
@@ -55,6 +57,7 @@ const AddProductForm = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    flexWrap: 'wrap'
                 }}
                 noValidate
                 autoComplete="off"

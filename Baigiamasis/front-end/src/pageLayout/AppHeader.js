@@ -24,6 +24,15 @@ function AppHeader() {
                 color="inherit"
                 variant="h6"
                 underline="none"
+                onClick={() => navigate("/")}
+                sx={rightLink}
+            >
+              {'Home'}
+            </Button>
+            <Button
+                color="inherit"
+                variant="h6"
+                underline="none"
                 onClick={() => navigate("/addproduct")}
                 sx={rightLink}
             >

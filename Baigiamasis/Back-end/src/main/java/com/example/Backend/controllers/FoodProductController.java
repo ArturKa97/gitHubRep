@@ -13,6 +13,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/products")
+@CrossOrigin
 public class FoodProductController {
 
     private FoodProductService foodProductService;
@@ -25,6 +26,7 @@ public class FoodProductController {
     public List<FoodProduct> getAllProducts () {
         return foodProductService.getAllProducts();
     }
+
     @PostMapping("/add")
     public FoodProduct addProduct (@RequestBody @Valid FoodProduct foodProduct) {
         return foodProductService.addProduct(foodProduct);

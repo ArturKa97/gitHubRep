@@ -23,14 +23,15 @@ const FoodProducts = () => {
                 display: 'inline-flex',
                 flexWrap: 'wrap',
                 alignItems: 'center',
-                margin: 1
+                margin: 1,
+                marginLeft: 6
             }}>
-                <Button onClick={refetch}>
-                    hi
-                </Button>
                 <>
                     {loadingElement || foodProductsElement}
                 </>
+                <Button onClick={refetch}>
+                    hi
+                </Button>
 
             </Box>
         </>

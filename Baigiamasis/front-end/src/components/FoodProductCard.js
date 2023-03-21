@@ -9,7 +9,8 @@ const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
     return (
         <>
             <Card sx={{
-                maxWidth: 300,
+                maxWidth: 220,
+                width: 220,
                 border: 2,
                 borderRadius: '16px',
                 margin: 2

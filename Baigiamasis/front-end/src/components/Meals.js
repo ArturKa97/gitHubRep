@@ -10,8 +10,13 @@ const Meals = () => {
                 display: 'inline-flex',
                 flexWrap: 'wrap',
                 alignItems: 'center',
-                margin: 1
+                margin: 1,
+                marginLeft: 6
             }}>
+                <MealCard/>
+                <MealCard/>
+                <MealCard/>
+                <MealCard/>
                 <MealCard/>
                 <MealCard/>
                 <MealCard/>

@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface FoodProductService {
     List<FoodProduct> getAllProducts();
     FoodProduct addProduct(FoodProduct foodProduct);
-
     Optional<FoodProduct> getProductById(Long id);
+    void deleteProduct (Long id);
 }

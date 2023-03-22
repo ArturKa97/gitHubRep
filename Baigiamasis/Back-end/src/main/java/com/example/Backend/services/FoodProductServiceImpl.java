@@ -4,12 +4,13 @@ import com.example.Backend.entities.FoodProduct;
 import com.example.Backend.repositories.FoodProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FoodProductServiceImpl implements FoodProductService{
+public class FoodProductServiceImpl implements FoodProductService {
 
     private final FoodProductRepository foodProductRepository;
 
@@ -28,6 +29,12 @@ public class FoodProductServiceImpl implements FoodProductService{
     @Override
     public Optional<FoodProduct> getProductById(Long id) {
         return foodProductRepository.findById(id);
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        foodProductRepository.deleteById(id);
+
     }
 
 }

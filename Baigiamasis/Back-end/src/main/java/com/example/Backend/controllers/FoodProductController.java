@@ -36,4 +36,9 @@ public class FoodProductController {
         return foodProductService.getProductById(id);
     }
 
+    @DeleteMapping("{id}")
+    public void deleteProduct (@PathVariable(value = "id") Long id) {
+        foodProductService.deleteProduct(id);
+    }
+
 }

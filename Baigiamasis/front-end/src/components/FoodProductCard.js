@@ -4,6 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {CardActionArea} from '@mui/material';
+import NutritionListItem from "./NutritionListItem";
+import Box from "@mui/material/Box";
+
 
 const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
     return (
@@ -23,16 +26,19 @@ const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
                         alt="placeholder for image"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography variant="h6" component="div">
                             {name}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Calories (100g): {calories} kcal,
-                            Protein (100g): {protein} g,
-                            Carbs (100g):{carbs} g,
-                            Sugar (100g): {sugar} g,
-                            Fat (100g): {fat} g.
+                        <Typography component="div">
+                            Nutrition values:
                         </Typography>
+                        <Box>
+                            <NutritionListItem nutrvalue={calories}/>
+                            <NutritionListItem nutrvalue={protein}/>
+                            <NutritionListItem nutrvalue={carbs}/>
+                            <NutritionListItem nutrvalue={sugar}/>
+                            <NutritionListItem nutrvalue={fat}/>
+                        </Box>
                     </CardContent>
                 </CardActionArea>
             </Card>

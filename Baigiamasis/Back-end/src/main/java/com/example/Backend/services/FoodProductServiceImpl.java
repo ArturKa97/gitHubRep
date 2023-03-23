@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +27,9 @@ public class FoodProductServiceImpl implements FoodProductService {
     }
 
     @Override
-    public Optional<FoodProduct> getProductById(Long id) {
-        return foodProductRepository.findById(id);
+    public FoodProduct getProductById(Long id) {
+
+        return foodProductRepository.getProductById(id);
     }
 
     @Override

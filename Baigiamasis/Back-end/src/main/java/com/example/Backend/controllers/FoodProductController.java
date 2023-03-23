@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,11 +31,11 @@ public class FoodProductController {
         return foodProductService.addProduct(foodProduct);
     }
     @GetMapping("/{id}")
-    public Optional<FoodProduct> getProductById (@PathVariable(value = "id") Long id) {
+    public FoodProduct getProductById (@PathVariable(value = "id") Long id) {
         return foodProductService.getProductById(id);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct (@PathVariable(value = "id") Long id) {
         foodProductService.deleteProduct(id);
     }

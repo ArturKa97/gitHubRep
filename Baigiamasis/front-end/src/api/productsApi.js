@@ -1,7 +1,7 @@
 import HTTP from "./"
-import {useQuery} from "react-query";
+import {useMutation, useQuery} from "react-query";
 
-const createProduct = (product) => HTTP.post("/products/add", product)
+const createProduct = (product) => HTTP.post("/products/add", {...product, name: product.productName})
 
 const getProducts = () => HTTP.get("products/all")
     .then(response => response.data)
@@ -11,4 +11,9 @@ const useProducts = () => {
     return {...context, products: context.data}
 }
 
-export {createProduct, getProducts, useProducts}
+const useCreateProduct = () => {
+    const mutation = useMutation(createProduct)
+    return mutation.mutateAsync
+}
+
+export {createProduct, getProducts, useProducts, useCreateProduct}

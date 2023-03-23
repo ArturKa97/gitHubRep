@@ -3,9 +3,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import {Field, Form, Formik} from "formik";
-import {CircularProgress} from "@mui/material";
+import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import * as Yup from "yup";
-import {createProduct} from "../api/productsApi";
+import {useCreateProduct} from "../api/productsApi";
+import {useState} from "react";
 
 const productValidation = Yup.object().shape({
         productName: Yup.string()
@@ -15,40 +16,60 @@ const productValidation = Yup.object().shape({
             .label("Product name"),
         calories: Yup.number()
             .positive("Must be a positive number!")
-            .min(0,({ min}) => `Minimum ${min} calories!` )
-            .max(1000, ({ max}) => `Maximum ${max}  calories!` )
+            .min(0, ({min}) => `Minimum ${min} calories!`)
+            .max(1000, ({max}) => `Maximum ${max}  calories!`)
             .required()
             .label("Calories"),
         protein: Yup.number()
             .positive("Must be a positive number!")
-            .min(0,({ min}) => `Minimum ${min} grams of protein!` )
-            .max(100, ({ max}) => `Maximum ${max} grams of protein!` )
+            .min(0, ({min}) => `Minimum ${min} grams of protein!`)
+            .max(100, ({max}) => `Maximum ${max} grams of protein!`)
             .required()
             .label("Protein"),
         carbs: Yup.number()
             .positive("Must be a positive number!")
-            .min(0,({ min}) => `Minimum ${min} grams of carbs!` )
-            .max(100, ({ max}) => `Maximum ${max} grams of carbs!` )
+            .min(0, ({min}) => `Minimum ${min} grams of carbs!`)
+            .max(100, ({max}) => `Maximum ${max} grams of carbs!`)
             .required()
             .label("Carbs"),
         sugar: Yup.number()
             .positive("Must be a positive number!")
-            .min(0,({ min}) => `Minimum ${min}grams of  sugar!` )
-            .max(100, ({ max}) => `Maximum ${max} grams of sugar!` )
+            .min(0, ({min}) => `Minimum ${min}grams of  sugar!`)
+            .max(100, ({max}) => `Maximum ${max} grams of sugar!`)
             .required()
             .label("Sugar"),
         fat: Yup.number()
             .positive("Must be a positive number!")
-            .min(0,({ min}) => `Minimum ${min} grams of fat!` )
-            .max(100, ({ max}) => `Maximum ${max} grams of fat!` )
+            .min(0, ({min}) => `Minimum ${min} grams of fat!`)
+            .max(100, ({max}) => `Maximum ${max} grams of fat!`)
             .required()
             .label("Fat")
     }
 )
-// const addProduct = createProduct;
 
 
 const AddProductForm = () => {
+    const foodProduct = {
+        productName: '',
+        calories: '',
+        protein: '',
+        carbs: '',
+        sugar: '',
+        fat: ''
+    }
+    const addProduct = useCreateProduct();
+    const [alertOpen, setAlertOpen] = useState(false);
+
+    const successAlert = (
+        <Snackbar open={alertOpen}
+                  anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                  autoHideDuration={5000}
+                  onClose={() => setAlertOpen(false)}>
+            <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{width: '100%'}}>
+                Product created!!!
+            </Alert>
+        </Snackbar>
+    )
     return (
         <>
             <Box
@@ -62,21 +83,16 @@ const AddProductForm = () => {
                 noValidate
                 autoComplete="off"
             >
-                <Formik initialValues={{
-                    productName: '',
-                    calories: '',
-                    protein: '',
-                    carbs: '',
-                    sugar: '',
-                    fat: ''
-                }} onSubmit={(values, {setSubmitting}) => {
-                    setTimeout(() => {
-                        console.log("submitted values:", values)
-                        setSubmitting(false)
-                    }, 2000)
-                }}
+                {successAlert}
+                <Formik initialValues={foodProduct}
+                        onSubmit={async (foodProduct, {setSubmitting}) => {
+                            await addProduct(foodProduct)
+
+                            setSubmitting(false)
+                            setAlertOpen(true)
+                        }}
                         validationSchema={productValidation}>
-                    {({isSubmitting , errors,touched}) => (
+                    {({isSubmitting, errors, touched}) => (
                         <Form>
                             <Field
                                 name="productName"

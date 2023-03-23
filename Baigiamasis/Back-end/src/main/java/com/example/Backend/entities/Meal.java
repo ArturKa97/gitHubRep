@@ -1,12 +1,10 @@
 package com.example.Backend.entities;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,15 +29,15 @@ public class Meal {
     @Column(name = "decription")
     private String description;
 
-    @OneToMany(mappedBy = "meal" , cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FoodProduct> foodProducts = new ArrayList<>();
 
-    public void addProduct (FoodProduct foodProduct) {
+    public void addProduct(FoodProduct foodProduct) {
         foodProducts.add(foodProduct);
         foodProduct.setMeal(this);
     }
 
-    public void removeProduct (FoodProduct foodProduct) {
+    public void removeProduct(FoodProduct foodProduct) {
         foodProducts.remove(foodProduct);
         foodProduct.setMeal(null);
     }

@@ -23,7 +23,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const MealCard = () => {
+const MealCard = ({name, description}) => {
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
@@ -42,7 +42,7 @@ const MealCard = () => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title="Kebabas"
+                title={name}
             />
             <CardMedia
                 component="img"
@@ -52,7 +52,7 @@ const MealCard = () => {
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    Meal description: Niam niam
+                    Meal description: {description}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

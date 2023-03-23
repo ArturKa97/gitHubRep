@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 
 const FoodProducts = () => {
 
-    const {isFetching,refetch, products = []} = useProducts();
+    const {isFetching, refetch, products = []} = useProducts();
 
     const foodProductsElement = products.map((listProduct, i) => (
         <FoodProductCard key={i} name={listProduct.name} calories={listProduct.calories} protein={listProduct.protein}
@@ -30,7 +30,7 @@ const FoodProducts = () => {
                     {loadingElement || foodProductsElement}
                 </>
                 <Button onClick={refetch}>
-                    hi
+                    Test
                 </Button>
 
             </Box>

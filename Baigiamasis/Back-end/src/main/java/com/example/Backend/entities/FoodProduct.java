@@ -1,6 +1,5 @@
 package com.example.Backend.entities;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -56,6 +55,4 @@ public class FoodProduct {
     @Column(name = "fat")
     private BigDecimal fat;
 
-    @ManyToOne
-    private Meal meal;
 }

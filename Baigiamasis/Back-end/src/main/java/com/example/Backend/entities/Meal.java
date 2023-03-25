@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Set;
+
 
 @Entity
 @Getter
@@ -29,16 +30,16 @@ public class Meal {
     @Column(name = "decription")
     private String description;
 
-    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodProduct> foodProducts = new ArrayList<>();
+    @ManyToMany
+    private Set<FoodProduct> products;
+
 
     public void addProduct(FoodProduct foodProduct) {
-        foodProducts.add(foodProduct);
-        foodProduct.setMeal(this);
+        products.add(foodProduct);
+    }
+    public void removeProduct(FoodProduct foodProduct) {
+        products.remove(foodProduct);
     }
 
-    public void removeProduct(FoodProduct foodProduct) {
-        foodProducts.remove(foodProduct);
-        foodProduct.setMeal(null);
-    }
+
 }

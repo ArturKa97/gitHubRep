@@ -25,6 +25,13 @@ public class MealServiceImpl implements MealService {
         return mealRepository.save(meal);
     }
 
+    @Override
+    public void addProductToMeal(FoodProduct foodProduct, Long id) {
+        Meal meal = getMealById(id);
+        meal.addProduct(foodProduct);
+        mealRepository.save(meal);
+    }
+
 
     @Override
     public Meal getMealById(Long id) {

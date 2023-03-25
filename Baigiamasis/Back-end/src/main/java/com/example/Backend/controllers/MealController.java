@@ -1,5 +1,6 @@
 package com.example.Backend.controllers;
 
+import com.example.Backend.entities.FoodProduct;
 import com.example.Backend.entities.Meal;
 import com.example.Backend.services.MealService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,11 @@ public class MealController {
     @PostMapping("/add")
     public Meal addMeal(@RequestBody Meal meal) {
         return mealService.addMeal(meal);
+    }
 
+    @PostMapping("/{id}")
+    public void addProductToMeal(@RequestBody FoodProduct foodProduct, @PathVariable(value = "id") Long id) {
+        mealService.addProductToMeal(foodProduct,id);
     }
 
     @GetMapping("/{id}")

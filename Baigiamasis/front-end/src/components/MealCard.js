@@ -23,7 +23,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const MealCard = ({name, description}) => {
+const MealCard = ({title, description, productList}) => {
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
@@ -42,7 +42,7 @@ const MealCard = ({name, description}) => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={name}
+                title={title}
             />
             <CardMedia
                 component="img"
@@ -76,10 +76,7 @@ const MealCard = ({name, description}) => {
                         Fat (100g): g.
                     </Typography>
                     <Typography paragraph>Product List:</Typography>
-                    <Typography paragraph>
-                       List Of products:(Kiekis)
-                        Agurks: 10g
-                    </Typography>
+                        {productList}
                 </CardContent>
             </Collapse>
         </Card>

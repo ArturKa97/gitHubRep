@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import {CardActionArea} from '@mui/material';
 import NutritionListItem from "./NutritionListItem";
 import Box from "@mui/material/Box";
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
@@ -19,10 +20,11 @@ const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
                 margin: 2
             }}>
                 <CardActionArea>
+                    <ClearIcon />
                     <CardMedia
                         component="img"
-                        height="140"
-                        image="/static/images/cards/contemplative-reptile.jpg"
+                        height="180"
+                        image="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg"
                         alt="placeholder for image"
                     />
                     <CardContent>

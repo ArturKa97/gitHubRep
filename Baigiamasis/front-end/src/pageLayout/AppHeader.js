@@ -33,15 +33,6 @@ function AppHeader() {
                 color="inherit"
                 variant="h6"
                 underline="none"
-                onClick={() => navigate("/addproduct")}
-                sx={rightLink}
-            >
-              {'Add Product'}
-            </Button>
-            <Button
-                color="inherit"
-                variant="h6"
-                underline="none"
                 onClick={() => navigate("/foodproducts")}
                 sx={rightLink}
             >

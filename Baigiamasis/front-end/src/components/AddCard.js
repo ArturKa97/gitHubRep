@@ -3,11 +3,7 @@ import {CardActionArea} from "@mui/material";
 import * as React from "react";
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 
-const showAlert = () => {
-    console.log("labas");
-}
-
-const AddCard = () => (
+const AddCard = ({openForm}) => (
     <Card sx={{
         maxWidth: 220,
         width: 220,
@@ -17,7 +13,7 @@ const AddCard = () => (
         borderRadius: '16px',
         margin: 2,
     }}>
-        <CardActionArea onClick={showAlert} sx={{
+        <CardActionArea onClick={openForm} sx={{
             maxWidth: 220,
             width: 220,
             maxHeight: 320,

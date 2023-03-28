@@ -5,10 +5,13 @@ import {useProducts} from "../api/productsApi";
 import {CircularProgress} from "@mui/material";
 import Button from "@mui/material/Button";
 import AddCard from "./AddCard"
+import {useState} from "react";
+import AddProductFormDialog from "./AddProductFormDialog";
 
 const FoodProducts = () => {
 
     const {isFetching, refetch, products = []} = useProducts();
+    const [openFormDialog, setOpenFormDialog] = useState(false);
 
     const foodProductsElement = products.map((listProduct, i) => (
         <FoodProductCard key={i} name={listProduct.name} calories={listProduct.calories} protein={listProduct.protein}
@@ -27,10 +30,9 @@ const FoodProducts = () => {
                 margin: 1,
                 marginLeft: 6
             }}>
-                <AddCard></AddCard>
-                <>
-                    {loadingElement || foodProductsElement}
-                </>
+                <AddCard openForm={() => {setOpenFormDialog(true)}}/>
+                <AddProductFormDialog refetchItems={refetch} open={openFormDialog} onClose={() => setOpenFormDialog(false)}/>
+                {loadingElement || foodProductsElement}
                 <Button onClick={refetch}>
                     Test
                 </Button>

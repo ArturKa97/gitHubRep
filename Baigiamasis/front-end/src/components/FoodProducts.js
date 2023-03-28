@@ -4,6 +4,7 @@ import * as React from 'react';
 import {useProducts} from "../api/productsApi";
 import {CircularProgress} from "@mui/material";
 import Button from "@mui/material/Button";
+import AddCard from "./AddCard"
 
 const FoodProducts = () => {
 
@@ -26,16 +27,15 @@ const FoodProducts = () => {
                 margin: 1,
                 marginLeft: 6
             }}>
+                <AddCard></AddCard>
                 <>
                     {loadingElement || foodProductsElement}
                 </>
                 <Button onClick={refetch}>
                     Test
                 </Button>
-
             </Box>
         </>
     )
 }
-
 export default FoodProducts

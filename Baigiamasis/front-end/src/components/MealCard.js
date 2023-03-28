@@ -23,7 +23,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const MealCard = ({title, description, productList}) => {
+const MealCard = ({title, description, productList, totalValues}) => {
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
@@ -34,6 +34,8 @@ const MealCard = ({title, description, productList}) => {
         <Card sx={{ maxWidth: 220,
             width: 220,
             border: 2,
+            maxHeight: 320,
+            height: 320,
             borderRadius: '16px',
             margin: 2 }}>
             <CardHeader
@@ -67,14 +69,8 @@ const MealCard = ({title, description, productList}) => {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Nutrition Values:</Typography>
-                    <Typography paragraph>
-                        Calories (100g): kcal,
-                        Protein (100g): g,
-                        Carbs (100g): g,
-                        Sugar (100g): g,
-                        Fat (100g): g.
-                    </Typography>
+                    <Typography paragraph>Total Nutrition Values:</Typography>
+                    {totalValues}
                     <Typography paragraph>Product List:</Typography>
                         {productList}
                 </CardContent>

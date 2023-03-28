@@ -15,6 +15,8 @@ const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
             <Card sx={{
                 maxWidth: 220,
                 width: 220,
+                maxHeight: 320,
+                height: 320,
                 border: 2,
                 borderRadius: '16px',
                 margin: 2
@@ -23,7 +25,7 @@ const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
                     <ClearIcon />
                     <CardMedia
                         component="img"
-                        height="180"
+                        height="140"
                         image="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg"
                         alt="placeholder for image"
                     />

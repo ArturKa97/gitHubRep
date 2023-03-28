@@ -14,7 +14,7 @@ const FoodProducts = () => {
     const [openFormDialog, setOpenFormDialog] = useState(false);
 
     const foodProductsElement = products.map((listProduct, i) => (
-        <FoodProductCard key={i} name={listProduct.name} calories={listProduct.calories} protein={listProduct.protein}
+        <FoodProductCard key={i} productId={listProduct.id} name={listProduct.name} calories={listProduct.calories} protein={listProduct.protein}
                          carbs={listProduct.carbs} fat={listProduct.fat} sugar={listProduct.sugar}/>
     ));
     const loadingElement = isFetching && (

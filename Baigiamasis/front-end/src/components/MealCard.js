@@ -34,8 +34,6 @@ const MealCard = ({title, description, productList, totalValues}) => {
         <Card sx={{ maxWidth: 220,
             width: 220,
             border: 2,
-            maxHeight: 320,
-            height: 320,
             borderRadius: '16px',
             margin: 2 }}>
             <CardHeader

@@ -9,7 +9,7 @@ import {useCreateProduct} from "../api/productsApi";
 import {useState} from "react";
 import {Field, Formik} from "formik";
 import TextField from "@mui/material/TextField";
-import {Alert, CircularProgress, LinearProgress, Snackbar} from "@mui/material";
+import {Alert, LinearProgress, Snackbar} from "@mui/material";
 import Box from "@mui/material/Box";
 
 const validationSchema = Yup.object().shape({

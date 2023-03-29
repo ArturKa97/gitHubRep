@@ -10,7 +10,11 @@ public interface MealService {
 
     Meal addMeal(Meal meal);
 
+    void deleteMeal(Long id);
+
     void addProductToMeal(FoodProduct foodProduct, Long id);
+
+//    void removeProductFromMeal(FoodProduct foodProduct, Long id);
 
     Meal getMealById(Long id);
 }

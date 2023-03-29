@@ -30,9 +30,19 @@ public class MealController {
     public void addProductToMeal(@RequestBody FoodProduct foodProduct, @PathVariable(value = "id") Long id) {
         mealService.addProductToMeal(foodProduct,id);
     }
+//    @PostMapping("/rem/{id}")
+//    public void removeProductFromMeal(@RequestBody FoodProduct foodProduct, @PathVariable(value = "id") Long id) {
+//        mealService.removeProductFromMeal(foodProduct,id);
+//    }
+    @DeleteMapping("/{id}")
+    public void deleteMeal(@PathVariable(value = "id") Long id) {
+        mealService.deleteMeal(id);
+
+    }
 
     @GetMapping("/{id}")
     public Meal getMealById(@PathVariable(value = "id") Long id) {
+
         return mealService.getMealById(id);
     }
 }

@@ -30,16 +30,19 @@ public class Meal {
     @Column(name = "decription")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST })
     private Set<FoodProduct> products;
 
 
     public void addProduct(FoodProduct foodProduct) {
-        products.add(foodProduct);
+        this.products.add(foodProduct);
+
     }
-    public void removeProduct(FoodProduct foodProduct) {
-        products.remove(foodProduct);
-    }
+//    public void removeProduct(FoodProduct foodProduct) {
+//
+//        this.products.remove(foodProduct);
+//
+//    }
 
 
 }

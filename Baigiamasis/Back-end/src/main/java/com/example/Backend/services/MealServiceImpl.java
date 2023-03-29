@@ -26,11 +26,24 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
+    public void deleteMeal(Long id) {
+        mealRepository.deleteById(id);
+
+    }
+
+    @Override
     public void addProductToMeal(FoodProduct foodProduct, Long id) {
         Meal meal = getMealById(id);
         meal.addProduct(foodProduct);
         mealRepository.save(meal);
     }
+
+//    @Override
+//    public void removeProductFromMeal(FoodProduct foodProduct, Long id) {
+//        Meal meal = getMealById(id);
+//        meal.removeProduct(foodProduct);
+//        mealRepository.save(meal);
+//    }
 
 
     @Override

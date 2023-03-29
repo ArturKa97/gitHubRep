@@ -3,7 +3,7 @@ import {CardActionArea} from "@mui/material";
 import * as React from "react";
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 
-const AddCard = ({openForm}) => (
+const AddCard = ({openForm, resetForm}) => (
     <Card sx={{
         maxWidth: 220,
         width: 220,
@@ -13,12 +13,17 @@ const AddCard = ({openForm}) => (
         borderRadius: '16px',
         margin: 2,
     }}>
-        <CardActionArea onClick={openForm} sx={{
-            maxWidth: 220,
-            width: 220,
-            maxHeight: 320,
-            height: 320,
-        }}>
+        <CardActionArea
+            onClick={() => {
+                {openForm(true)};
+                {resetForm(null)}}
+        }
+            sx={{
+                maxWidth: 220,
+                width: 220,
+                maxHeight: 320,
+                height: 320,
+            }}>
             <AddCircleTwoToneIcon sx={{
                 maxWidth: 120,
                 width: 120,

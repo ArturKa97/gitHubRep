@@ -51,8 +51,18 @@ const validationSchema = Yup.object().shape({
     }
 )
 
-const AddProductFormDialog = ({refetchItems, open, onClose}) => {
-    const foodProduct = {
+const AddProductFormDialog = ({refetchItems, open, onClose, product}) => {
+    const foodProduct = product ? {
+        id: product.id,
+        productName: product.name,
+        calories: product.calories,
+        protein: product.protein,
+        carbs: product.carbs,
+        sugar: product.sugar,
+        fat: product.fat,
+    } : {
+
+        id: null,
         productName: '',
         calories: '',
         protein: '',
@@ -63,10 +73,11 @@ const AddProductFormDialog = ({refetchItems, open, onClose}) => {
     const addProduct = useCreateProduct();
     const [alertOpen, setAlertOpen] = useState(false);
 
+    const title = product ? "Edit Food Product" : "Add New Food Product"
     return (
         <>
             <Dialog open={open} onClose={onClose}>
-                <DialogTitle>Title</DialogTitle>
+                <DialogTitle>{title}</DialogTitle>
                 <Formik initialValues={foodProduct}
                         onSubmit={async (foodProduct, {setSubmitting}) => {
                             await addProduct(foodProduct)
@@ -78,66 +89,68 @@ const AddProductFormDialog = ({refetchItems, open, onClose}) => {
                         validationSchema={validationSchema}>
                     {({isSubmitting, submitForm, errors, touched}) => {
                         return (
-                        <>
-                            <DialogContent>
-                                <Field
-                                    name="productName"
-                                    label="Product name"
-                                    placeholder="Product name"
-                                    error={!!errors.productName && touched.productName}
-                                    helperText={touched.productName && errors["productName"]}
-                                    as={TextField}
+                            <>
+                                <DialogContent>
+                                    <Field
+                                        name="productName"
+                                        label="Product name"
+                                        placeholder="Product name"
+                                        error={!!errors.productName && touched.productName}
+                                        helperText={touched.productName && errors["productName"]}
+                                        as={TextField}
 
-                                />
-                                <Field
-                                    name="calories"
-                                    label="Calories(100g)"
-                                    placeholder="Calories(100g)"
-                                    error={!!errors.calories && touched.calories}
-                                    helperText={touched.calories && errors["calories"]}
-                                    as={TextField}
+                                    />
+                                    <Field
+                                        name="calories"
+                                        label="Calories(100g)"
+                                        placeholder="Calories(100g)"
+                                        error={!!errors.calories && touched.calories}
+                                        helperText={touched.calories && errors["calories"]}
+                                        as={TextField}
 
-                                />
-                                <Field
-                                    name="protein"
-                                    label="Protein(100g)"
-                                    placeholder="Protein(100g)"
-                                    error={!!errors.protein && touched.protein}
-                                    helperText={touched.protein && errors["protein"]}
-                                    as={TextField}
-                                />
-                                <Field
-                                    name="carbs"
-                                    label="Carbs(100g)"
-                                    placeholder="Carbs(100g)"
-                                    error={!!errors.carbs && touched.carbs}
-                                    helperText={touched.carbs && errors["carbs"]}
-                                    as={TextField}
-                                />
-                                <Field
-                                    name="sugar"
-                                    label="Sugar(100g)"
-                                    placeholder="Sugar(100g)"
-                                    error={!!errors.sugar && touched.sugar}
-                                    helperText={touched.sugar && errors["sugar"]}
-                                    as={TextField}
-                                />
-                                <Field
-                                    name="fat"
-                                    label="Fat(100g)"
-                                    placeholder="Fat(100g)"
-                                    error={!!errors.fat && touched.fat}
-                                    helperText={touched.fat && errors["fat"]}
-                                    as={TextField}
-                                />
-                                {isSubmitting &&  <Box sx={{ width: '80%', height: '100%' }}><LinearProgress /></Box>}
-                            </DialogContent>
-                            <DialogActions>
-                                <Button variant="outlined" type="submit" disabled={isSubmitting} onClick={submitForm}>Add</Button>
-                                <Button onClick={onClose}>Cancel</Button>
-                            </DialogActions>
-                        </>
-                        )}}
+                                    />
+                                    <Field
+                                        name="protein"
+                                        label="Protein(100g)"
+                                        placeholder="Protein(100g)"
+                                        error={!!errors.protein && touched.protein}
+                                        helperText={touched.protein && errors["protein"]}
+                                        as={TextField}
+                                    />
+                                    <Field
+                                        name="carbs"
+                                        label="Carbs(100g)"
+                                        placeholder="Carbs(100g)"
+                                        error={!!errors.carbs && touched.carbs}
+                                        helperText={touched.carbs && errors["carbs"]}
+                                        as={TextField}
+                                    />
+                                    <Field
+                                        name="sugar"
+                                        label="Sugar(100g)"
+                                        placeholder="Sugar(100g)"
+                                        error={!!errors.sugar && touched.sugar}
+                                        helperText={touched.sugar && errors["sugar"]}
+                                        as={TextField}
+                                    />
+                                    <Field
+                                        name="fat"
+                                        label="Fat(100g)"
+                                        placeholder="Fat(100g)"
+                                        error={!!errors.fat && touched.fat}
+                                        helperText={touched.fat && errors["fat"]}
+                                        as={TextField}
+                                    />
+                                    {isSubmitting && <Box sx={{width: '80%', height: '100%'}}><LinearProgress/></Box>}
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button variant="outlined" type="submit" disabled={isSubmitting}
+                                            onClick={submitForm}>Add</Button>
+                                    <Button onClick={onClose}>Cancel</Button>
+                                </DialogActions>
+                            </>
+                        )
+                    }}
                 </Formik>
             </Dialog>
             <Snackbar open={alertOpen}

@@ -7,15 +7,22 @@ import Button from "@mui/material/Button";
 import AddCard from "./AddCard"
 import {useState} from "react";
 import AddProductFormDialog from "./AddProductFormDialog";
+import HTTP from "../api";
 
 const FoodProducts = () => {
 
     const {isFetching, refetch, products = []} = useProducts();
     const [openFormDialog, setOpenFormDialog] = useState(false);
+    const [editProduct, setEditProduct] = useState(null);
+
+    const deleteProduct = async (productId) => {
+        await HTTP.delete(`/products/${productId}`);
+        await refetch();
+    };
 
     const foodProductsElement = products.map((listProduct, i) => (
-        <FoodProductCard key={i} productId={listProduct.id} name={listProduct.name} calories={listProduct.calories} protein={listProduct.protein}
-                         carbs={listProduct.carbs} fat={listProduct.fat} sugar={listProduct.sugar}/>
+        <FoodProductCard key={i} product={listProduct} deleteProduct={deleteProduct} productToEdit={setEditProduct}
+                         openForm={setOpenFormDialog}/>
     ));
     const loadingElement = isFetching && (
         <CircularProgress color="inherit"/>
@@ -30,8 +37,9 @@ const FoodProducts = () => {
                 margin: 1,
                 marginLeft: 6
             }}>
-                <AddCard openForm={() => {setOpenFormDialog(true)}}/>
-                <AddProductFormDialog refetchItems={refetch} open={openFormDialog} onClose={() => setOpenFormDialog(false)}/>
+                <AddCard openForm={setOpenFormDialog} resetForm={setEditProduct}/>
+                <AddProductFormDialog refetchItems={refetch} open={openFormDialog}
+                                      onClose={() => setOpenFormDialog(false)} product={editProduct}/>
                 {loadingElement || foodProductsElement}
                 <Button onClick={refetch}>
                     Test

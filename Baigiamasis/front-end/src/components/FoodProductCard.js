@@ -6,10 +6,14 @@ import Typography from '@mui/material/Typography';
 import {CardActionArea} from '@mui/material';
 import NutritionListItem from "./NutritionListItem";
 import Box from "@mui/material/Box";
-import ClearIcon from '@mui/icons-material/Clear';
+import CardHeader from "@mui/material/CardHeader";
+import ItemActionMenu from "./ItemActionMenu";
 
 
-const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
+const FoodProductCard = ({product, deleteProduct, productToEdit, openForm}) => {
+
+    const {id, name, calories, protein, carbs, sugar, fat} = product;
+
     return (
         <>
             <Card sx={{
@@ -21,8 +25,19 @@ const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
                 borderRadius: '16px',
                 margin: 2
             }}>
+                <CardHeader
+                    action={
+                        <ItemActionMenu deleteProduct={() => {
+                            deleteProduct(id)
+                        }} productToEdit={() => {
+                            {productToEdit(product)};
+                            {openForm(true)}}
+                        }
+                        />
+                    }
+                    title={name}
+                />
                 <CardActionArea>
-                    <ClearIcon />
                     <CardMedia
                         component="img"
                         height="140"
@@ -30,9 +45,6 @@ const FoodProductCard = ({name, calories, protein, carbs, sugar, fat}) => {
                         alt="placeholder for image"
                     />
                     <CardContent>
-                        <Typography variant="h6" component="div">
-                            {name}
-                        </Typography>
                         <Typography component="div">
                             Nutrition values:
                         </Typography>

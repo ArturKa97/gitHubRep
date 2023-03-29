@@ -8,16 +8,19 @@ import AddCard from "./AddCard"
 import {useState} from "react";
 import AddProductFormDialog from "./AddProductFormDialog";
 import HTTP from "../api";
+import SnackbarAlert from "./SnackbarAlert";
 
 const FoodProducts = () => {
 
     const {isFetching, refetch, products = []} = useProducts();
     const [openFormDialog, setOpenFormDialog] = useState(false);
     const [editProduct, setEditProduct] = useState(null);
+    const [alertOpen, setAlertOpen] = useState(false);
 
     const deleteProduct = async (productId) => {
         await HTTP.delete(`/products/${productId}`);
         await refetch();
+        await setAlertOpen(true)
     };
 
     const foodProductsElement = products.map((listProduct, i) => (
@@ -45,6 +48,7 @@ const FoodProducts = () => {
                     Test
                 </Button>
             </Box>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"info"} message={"Product deleted!"}/>
         </>
     )
 }

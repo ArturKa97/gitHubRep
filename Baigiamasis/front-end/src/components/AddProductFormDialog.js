@@ -11,6 +11,7 @@ import {Field, Formik} from "formik";
 import TextField from "@mui/material/TextField";
 import {Alert, LinearProgress, Snackbar} from "@mui/material";
 import Box from "@mui/material/Box";
+import SnackbarAlert from "./SnackbarAlert";
 
 const validationSchema = Yup.object().shape({
         productName: Yup.string()
@@ -153,14 +154,7 @@ const AddProductFormDialog = ({refetchItems, open, onClose, product}) => {
                     }}
                 </Formik>
             </Dialog>
-            <Snackbar open={alertOpen}
-                      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-                      autoHideDuration={5000}
-                      onClose={() => setAlertOpen(false)}>
-                <Alert onClose={() => setAlertOpen(false)} variant="filled" severity="success" sx={{width: '100%'}}>
-                    Product added!
-                </Alert>
-            </Snackbar>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={"Product added!"}/>
         </>
     );
 }

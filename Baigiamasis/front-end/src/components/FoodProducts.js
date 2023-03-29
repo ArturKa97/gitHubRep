@@ -17,14 +17,10 @@ const FoodProducts = () => {
     const [editProduct, setEditProduct] = useState(null);
     const [alertOpen, setAlertOpen] = useState(false);
 
-    const deleteProduct = async (productId) => {
-        await HTTP.delete(`/products/${productId}`);
-        await refetch();
-        await setAlertOpen(true)
-    };
+
 
     const foodProductsElement = products.map((listProduct, i) => (
-        <FoodProductCard key={i} product={listProduct} deleteProduct={deleteProduct} productToEdit={setEditProduct}
+        <FoodProductCard key={i} product={listProduct} refetchProducts={refetch} openAlert ={setAlertOpen} productToEdit={setEditProduct}
                          openForm={setOpenFormDialog}/>
     ));
     const loadingElement = isFetching && (

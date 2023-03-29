@@ -8,11 +8,18 @@ import NutritionListItem from "./NutritionListItem";
 import Box from "@mui/material/Box";
 import CardHeader from "@mui/material/CardHeader";
 import ItemActionMenu from "./ItemActionMenu";
+import HTTP from "../api";
 
 
-const FoodProductCard = ({product, deleteProduct, productToEdit, openForm}) => {
+const FoodProductCard = ({product, refetchProducts, openAlert, productToEdit, openForm}) => {
 
     const {id, name, calories, protein, carbs, sugar, fat} = product;
+
+    const deleteProduct = async (productId) => {
+        await HTTP.delete(`/products/${productId}`);
+        await refetchProducts();
+        await openAlert(true)
+    };
 
     return (
         <>

@@ -8,7 +8,7 @@ import java.util.List;
 public interface MealService {
     List<Meal> getAllMeals();
 
-    Meal addMeal(Meal meal);
+    void addMeal(Meal meal);
 
     void deleteMeal(Long id);
 

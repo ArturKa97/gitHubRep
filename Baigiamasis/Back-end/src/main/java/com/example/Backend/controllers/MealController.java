@@ -22,8 +22,8 @@ public class MealController {
     }
 
     @PostMapping("/add")
-    public Meal addMeal(@RequestBody Meal meal) {
-        return mealService.addMeal(meal);
+    public void addMeal(@RequestBody Meal meal) {
+        mealService.addMeal(meal);
     }
 
     @PostMapping("/{id}")

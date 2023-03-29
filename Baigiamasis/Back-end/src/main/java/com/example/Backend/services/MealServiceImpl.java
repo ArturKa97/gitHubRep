@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +21,17 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public Meal addMeal(Meal meal) {
+    public void addMeal(Meal meal) {
+        if (meal.getId() == null) {
+            mealRepository.save(meal);
+        }
+        else {
+            Set<FoodProduct> mealProducts = getMealById(meal.getId()).getProducts();
+            meal.setProducts(mealProducts);
+            mealRepository.save(meal);
+        }
 
-        return mealRepository.save(meal);
+
     }
 
     @Override

@@ -4,45 +4,17 @@ import MealCard from "./MealCard";
 import {CircularProgress} from "@mui/material";
 import {useMeals} from "../api/mealsApi";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import AddCard from "./AddCard";
 import {useState} from "react";
 import AddMealFormDialog from "./AddMealFormDialog";
 
-
 const Meals = () => {
-
     const {isFetching, refetch, meals = []} = useMeals();
     const [openFormDialog, setOpenFormDialog] = useState(false);
 
-    let totalCal = 0;
-
-    const addingValues = (meals) => {
-        for (const product of meals) {
-            totalCal += +product.calories
-        }
-        return totalCal;
-    }
-
-
     const mealElement = meals.map((listMeal, i) => (
-        <>
-            <MealCard key={i} title={listMeal.name} description={listMeal.description}
-                      totalValues={addingValues(listMeal.products)}
-                // listMeal.products.map((product, i) => (
-                //     <Typography paragraph key={i}>
-                //         Protein: {product.protein},
-                //         Carbs: {product.carbs},
-                //         Sugar: {product.sugar},
-                //         Fat: {product.fat}
-                //     </Typography>
-                // ))}
-                      productList={listMeal.products.map((product, i) => (
-                          <Typography key={i} paragraph>{product.name}</Typography>
-                      ))
-                      }/>
-        </>
-    ));
+            <MealCard key={i} meal={listMeal} products={listMeal.products}/>
+    ))
 
     const loadingElement = isFetching && (
         <CircularProgress color="inherit"/>
@@ -58,8 +30,10 @@ const Meals = () => {
                 margin: 1,
                 marginLeft: 6
             }}>
-                <AddCard openForm={() => {setOpenFormDialog(true)}}/>
-                <AddMealFormDialog refetchItems={refetch} open={openFormDialog} onClose={() => setOpenFormDialog(false)}/>
+                <AddCard openForm={() => {
+                    setOpenFormDialog(true)}}/>
+                <AddMealFormDialog refetchItems={refetch} open={openFormDialog}
+                                   onClose={() => setOpenFormDialog(false)}/>
                 {loadingElement || mealElement}
             </Box>
             <Button onClick={refetch}>

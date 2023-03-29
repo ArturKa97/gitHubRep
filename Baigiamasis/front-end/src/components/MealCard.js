@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {useState} from "react";
+import NutritionListItem from "./NutritionListItem";
+import Box from "@mui/material/Box";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -23,12 +25,36 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const MealCard = ({title, description, productList, totalValues}) => {
+const MealCard = ({meal, products}) => {
     const [expanded, setExpanded] = useState(false);
+
+    const productList= products.map((listProduct, i) => (
+        <Box key={i}> {listProduct.name} </Box>
+    ))
+
+    const totals = products.reduce((total, product)=> {
+            total.calories += product.calories
+            total.protein += product.carbs
+            total.carbs += product.calories
+            total.sugar += product.carbs
+            total.fat += product.calories
+
+        return total
+        },
+        {
+            calories: 0,
+            protein: 0,
+            carbs: 0,
+            sugar: 0,
+            fat: 0
+        }
+        )
+    const {name, description} = meal;
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
 
     return (
         <Card sx={{ maxWidth: 220,
@@ -42,7 +68,7 @@ const MealCard = ({title, description, productList, totalValues}) => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={title}
+                title={name}
             />
             <CardMedia
                 component="img"
@@ -68,9 +94,15 @@ const MealCard = ({title, description, productList, totalValues}) => {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>Total Nutrition Values:</Typography>
-                    {totalValues}
+                    <Box>
+                    <NutritionListItem nutrvalue={"Calories: " + totals.calories + " kcal"}/>
+                    <NutritionListItem nutrvalue={"Protein: " + totals.protein + " g"}/>
+                    <NutritionListItem nutrvalue={"Carbs: " + totals.carbs + " g"}/>
+                    <NutritionListItem nutrvalue={"Sugar: " + totals.sugar + " g"}/>
+                    <NutritionListItem nutrvalue={"Fat: " + totals.fat + " g"}/>
+                    </Box>
                     <Typography paragraph>Product List:</Typography>
-                        {productList}
+                    {productList}
                 </CardContent>
             </Collapse>
         </Card>

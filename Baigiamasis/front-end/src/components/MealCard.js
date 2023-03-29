@@ -9,10 +9,11 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {useState} from "react";
 import NutritionListItem from "./NutritionListItem";
 import Box from "@mui/material/Box";
+import HTTP from "../api";
+import ItemActionMenu from "./ItemActionMenu";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -25,8 +26,21 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const MealCard = ({meal, products}) => {
+const MealCard = ({meal, products, refetchMeals, openAlert, mealToEdit, openForm}) => {
     const [expanded, setExpanded] = useState(false);
+    const {id, name, description} = meal;
+
+    const addProductToMeal = async (productId) => {
+        await HTTP.post(`/meals/${productId}`);
+        await refetchMeals();
+    };
+
+    const deleteMeal = async (mealId) => {
+        await HTTP.delete(`/meals/${mealId}`);
+        await refetchMeals();
+        await openAlert(true)
+
+    };
 
     const productList= products.map((listProduct, i) => (
         <Box key={i}> {listProduct.name} </Box>
@@ -49,7 +63,6 @@ const MealCard = ({meal, products}) => {
             fat: 0
         }
         )
-    const {name, description} = meal;
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -64,9 +77,13 @@ const MealCard = ({meal, products}) => {
             margin: 2 }}>
             <CardHeader
                 action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
+                    <ItemActionMenu deleteItem={() => {
+                        deleteMeal(id)
+                    }} itemToEdit={() => {
+                        {mealToEdit(meal)};
+                        {openForm(true)}}
+                    }
+                    />
                 }
                 title={name}
             />

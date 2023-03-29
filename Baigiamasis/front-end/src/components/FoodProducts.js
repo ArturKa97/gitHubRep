@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import AddCard from "./AddCard"
 import {useState} from "react";
 import AddProductFormDialog from "./AddProductFormDialog";
-import HTTP from "../api";
 import SnackbarAlert from "./SnackbarAlert";
 
 const FoodProducts = () => {
@@ -18,9 +17,8 @@ const FoodProducts = () => {
     const [alertOpen, setAlertOpen] = useState(false);
 
 
-
     const foodProductsElement = products.map((listProduct, i) => (
-        <FoodProductCard key={i} product={listProduct} refetchProducts={refetch} openAlert ={setAlertOpen} productToEdit={setEditProduct}
+        <FoodProductCard key={i} product={listProduct} refetchProducts={refetch} openAlert={setAlertOpen} productToEdit={setEditProduct}
                          openForm={setOpenFormDialog}/>
     ));
     const loadingElement = isFetching && (

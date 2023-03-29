@@ -5,7 +5,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import {useState} from "react";
 
-const ItemActionMenu = ({productToEdit,deleteProduct}) => {
+const ItemActionMenu = ({itemToEdit,deleteItem}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
     const handleClick = (event) => {
@@ -34,8 +34,8 @@ const ItemActionMenu = ({productToEdit,deleteProduct}) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={productToEdit}>Edit</MenuItem>
-                <MenuItem onClick={deleteProduct}>Remove</MenuItem>
+                <MenuItem onClick={itemToEdit}>Edit</MenuItem>
+                <MenuItem onClick={deleteItem}>Remove</MenuItem>
             </Menu>
         </>
     );

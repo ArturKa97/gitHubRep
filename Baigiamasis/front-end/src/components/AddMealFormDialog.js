@@ -11,36 +11,45 @@ import TextField from "@mui/material/TextField";
 import {Alert, LinearProgress, Snackbar} from "@mui/material";
 import Box from "@mui/material/Box";
 import {useCreateMeal} from "../api/mealsApi";
+import SnackbarAlert from "./SnackbarAlert";
 
 const validationSchema = Yup.object().shape({
-    mealName: Yup.string()
-        .min(2, ({label, min}) => `${label} must contain more than ${min} chars!`)
-        .max(20, ({label, max}) => `${label} must contain less than ${max} chars!`)
-        .required()
-        .label("Meal name"),
-    description: Yup.string()
-        .min(2, ({label, min}) => `${label} must contain more than ${min} chars!`)
-        .max(100, ({label, max}) => `${label} must contain less than ${max} chars!`)
-        .required()
-        .label("Description"),
-}
+        mealName: Yup.string()
+            .min(2, ({label, min}) => `${label} must contain more than ${min} chars!`)
+            .max(20, ({label, max}) => `${label} must contain less than ${max} chars!`)
+            .required()
+            .label("Meal name"),
+        description: Yup.string()
+            .min(2, ({label, min}) => `${label} must contain more than ${min} chars!`)
+            .max(100, ({label, max}) => `${label} must contain less than ${max} chars!`)
+            .required()
+            .label("Description"),
+    }
 )
 
-const AddMealFormDialog = ({refetchItems, open, onClose}) => {
-    const meal = {
-        mealName: '',
-        description: '',
-    }
+const AddMealFormDialog = ({refetchItems, open, onClose, meal}) => {
+    const mealValues = meal ?
+        {
+            id: meal.id,
+            mealName: meal.name,
+            description: meal.description
+        } : {
+            id: null,
+            mealName: '',
+            description: ''
+        }
     const addMeal = useCreateMeal();
     const [alertOpen, setAlertOpen] = useState(false);
+
+    const title = meal ? "Edit Meal" : "Add New Meal"
 
     return (
         <>
             <Dialog open={open} onClose={onClose}>
-                <DialogTitle>Title</DialogTitle>
-                <Formik initialValues={meal}
-                        onSubmit={async (meal, {setSubmitting}) => {
-                            await addMeal(meal)
+                <DialogTitle>{title}</DialogTitle>
+                <Formik initialValues={mealValues}
+                        onSubmit={async (mealValues, {setSubmitting}) => {
+                            await addMeal(mealValues)
                             setSubmitting(false)
                             onClose()
                             refetchItems()
@@ -69,24 +78,19 @@ const AddMealFormDialog = ({refetchItems, open, onClose}) => {
                                         as={TextField}
 
                                     />
-                                    {isSubmitting &&  <Box sx={{ width: '100%', height: '100%' }}><LinearProgress /></Box>}
+                                    {isSubmitting && <Box sx={{width: '100%', height: '100%'}}><LinearProgress/></Box>}
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button variant="outlined" type="submit" disabled={isSubmitting} onClick={submitForm}>Add</Button>
+                                    <Button variant="outlined" type="submit" disabled={isSubmitting}
+                                            onClick={submitForm}>Add</Button>
                                     <Button onClick={onClose}>Cancel</Button>
                                 </DialogActions>
                             </>
-                        )}}
+                        )
+                    }}
                 </Formik>
             </Dialog>
-            <Snackbar open={alertOpen}
-                      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-                      autoHideDuration={5000}
-                      onClose={() => setAlertOpen(false)}>
-                <Alert onClose={() => setAlertOpen(false)} variant="filled" severity="success" sx={{width: '100%'}}>
-                    Meal added!
-                </Alert>
-            </Snackbar>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={"Meal added!"}/>
         </>
     );
 }

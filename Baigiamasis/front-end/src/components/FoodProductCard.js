@@ -34,9 +34,9 @@ const FoodProductCard = ({product, refetchProducts, openAlert, productToEdit, op
             }}>
                 <CardHeader
                     action={
-                        <ItemActionMenu deleteProduct={() => {
+                        <ItemActionMenu deleteItem={() => {
                             deleteProduct(id)
-                        }} productToEdit={() => {
+                        }} itemToEdit={() => {
                             {productToEdit(product)};
                             {openForm(true)}}
                         }

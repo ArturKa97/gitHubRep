@@ -45,15 +45,15 @@ const FoodProductCard = ({product, deleteProduct, productToEdit, openForm}) => {
                         alt="placeholder for image"
                     />
                     <CardContent>
-                        <Typography component="div">
-                            Nutrition values:
+                        <Typography fontWeight="bold" variant="h8" component="div">
+                            Nutrition values(100g):
                         </Typography>
                         <Box>
-                            <NutritionListItem nutrvalue={calories}/>
-                            <NutritionListItem nutrvalue={protein}/>
-                            <NutritionListItem nutrvalue={carbs}/>
-                            <NutritionListItem nutrvalue={sugar}/>
-                            <NutritionListItem nutrvalue={fat}/>
+                            <NutritionListItem nutrvalue={"Calories: "+calories+ " kcal"}/>
+                            <NutritionListItem nutrvalue={"Protein: " + protein + " g"}/>
+                            <NutritionListItem nutrvalue={"Carbs: " + carbs + " g"}/>
+                            <NutritionListItem nutrvalue={"Sugar: " + sugar + " g"}/>
+                            <NutritionListItem nutrvalue={"Fat: " + fat + " g"}/>
                         </Box>
                     </CardContent>
                 </CardActionArea>

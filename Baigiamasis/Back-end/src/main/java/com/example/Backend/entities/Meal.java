@@ -1,15 +1,14 @@
 package com.example.Backend.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 
 @Entity
+@EqualsAndHashCode
 @Getter
 @Setter
 @Table(name = "meal")
@@ -24,25 +23,28 @@ public class Meal {
 
     @NotBlank
     @Column(name = "name")
+    @EqualsAndHashCode.Exclude
     private String name;
 
     @NotBlank
     @Column(name = "decription")
+    @EqualsAndHashCode.Exclude
     private String description;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST })
     private Set<FoodProduct> products;
 
 
-    public void addProduct(FoodProduct foodProduct) {
-        this.products.add(foodProduct);
+    public void addProduct(List<FoodProduct> foodProducts) {
+        this.products.addAll(foodProducts);
 
     }
-//    public void removeProduct(FoodProduct foodProduct) {
-//
-//        this.products.remove(foodProduct);
-//
-//    }
+    public void removeProduct(List<FoodProduct> foodProducts) {
+
+        this.products.removeAll(foodProducts);
+
+    }
+
 
 
 }

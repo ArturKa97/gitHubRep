@@ -12,9 +12,9 @@ public interface MealService {
 
     void deleteMeal(Long id);
 
-    void addProductToMeal(FoodProduct foodProduct, Long id);
+    void addProductToMeal(List<FoodProduct> foodProducts, Long id);
 
-//    void removeProductFromMeal(FoodProduct foodProduct, Long id);
+    void removeProductFromMeal(List<FoodProduct> foodProducts, Long id);
 
     Meal getMealById(Long id);
 }

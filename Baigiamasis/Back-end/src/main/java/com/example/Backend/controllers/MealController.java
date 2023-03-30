@@ -5,7 +5,6 @@ import com.example.Backend.entities.Meal;
 import com.example.Backend.services.MealService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -27,13 +26,13 @@ public class MealController {
     }
 
     @PostMapping("/{id}")
-    public void addProductToMeal(@RequestBody FoodProduct foodProduct, @PathVariable(value = "id") Long id) {
-        mealService.addProductToMeal(foodProduct,id);
+    public void addProductToMeal(@RequestBody List<FoodProduct> foodProducts, @PathVariable(value = "id") Long id) {
+        mealService.addProductToMeal(foodProducts,id);
     }
-//    @PostMapping("/rem/{id}")
-//    public void removeProductFromMeal(@RequestBody FoodProduct foodProduct, @PathVariable(value = "id") Long id) {
-//        mealService.removeProductFromMeal(foodProduct,id);
-//    }
+    @PatchMapping("/{id}")
+    public void removeProductFromMeal(@RequestBody List<FoodProduct> foodProducts, @PathVariable(value = "id") Long id) {
+        mealService.removeProductFromMeal(foodProducts,id);
+    }
     @DeleteMapping("/{id}")
     public void deleteMeal(@PathVariable(value = "id") Long id) {
         mealService.deleteMeal(id);

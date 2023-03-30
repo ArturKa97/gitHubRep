@@ -3,7 +3,6 @@ import * as React from 'react';
 import MealCard from "./MealCard";
 import {CircularProgress} from "@mui/material";
 import {useMeals} from "../api/mealsApi";
-import Button from "@mui/material/Button";
 import AddCard from "./AddCard";
 import {useState} from "react";
 import AddMealFormDialog from "./AddMealFormDialog";

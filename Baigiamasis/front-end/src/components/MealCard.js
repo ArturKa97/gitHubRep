@@ -13,7 +13,9 @@ import {useState} from "react";
 import NutritionListItem from "./NutritionListItem";
 import Box from "@mui/material/Box";
 import HTTP from "../api";
-import ItemActionMenu from "./ItemActionMenu";
+import MealActionMenu from "./MealActionMenu";
+import {useProducts} from "../api/productsApi";
+import SearchBarDialog from "./SearchBarDialog";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -26,12 +28,13 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const MealCard = ({meal, products, refetchMeals, openAlert, mealToEdit, openForm}) => {
+const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, openForm}) => {
     const [expanded, setExpanded] = useState(false);
+    const [openFormDialog, setOpenFormDialog] = useState(false);
     const {id, name, description} = meal;
 
-    const addProductToMeal = async (productId) => {
-        await HTTP.post(`/meals/${productId}`);
+    const addProductToMeal = async (product , mealId) => {
+        await HTTP.post(`/meals/${mealId}`, product);
         await refetchMeals();
     };
 
@@ -41,12 +44,13 @@ const MealCard = ({meal, products, refetchMeals, openAlert, mealToEdit, openForm
         await openAlert(true)
 
     };
+    let {products=[]} = useProducts();
 
-    const productList= products.map((listProduct, i) => (
+    const productList= mealProducts.map((listProduct, i) => (
         <Box key={i}> {listProduct.name} </Box>
     ))
 
-    const totals = products.reduce((total, product)=> {
+    const totals = mealProducts.reduce((total, product)=> {
             total.calories += product.calories
             total.protein += product.carbs
             total.carbs += product.calories
@@ -75,13 +79,17 @@ const MealCard = ({meal, products, refetchMeals, openAlert, mealToEdit, openForm
             border: 2,
             borderRadius: '16px',
             margin: 2 }}>
+            <SearchBarDialog itemData={products} open={openFormDialog}
+                             onClose={() => setOpenFormDialog(false)} itemId={id} action={addProductToMeal}/>
             <CardHeader
                 action={
-                    <ItemActionMenu deleteItem={() => {
+                    <MealActionMenu deleteItem={() => {
                         deleteMeal(id)
                     }} itemToEdit={() => {
-                        {mealToEdit(meal)};
-                        {openForm(true)}}
+                        mealToEdit(meal);
+                        openForm(true)}
+                    } openSearchBarForm={() => {
+                    setOpenFormDialog(true)}
                     }
                     />
                 }

@@ -7,7 +7,7 @@ import {CardActionArea} from '@mui/material';
 import NutritionListItem from "./NutritionListItem";
 import Box from "@mui/material/Box";
 import CardHeader from "@mui/material/CardHeader";
-import ItemActionMenu from "./ItemActionMenu";
+import FoodActionMenu from "./FoodActionMenu";
 import HTTP from "../api";
 
 
@@ -34,7 +34,7 @@ const FoodProductCard = ({product, refetchProducts, openAlert, productToEdit, op
             }}>
                 <CardHeader
                     action={
-                        <ItemActionMenu deleteItem={() => {
+                        <FoodActionMenu deleteItem={() => {
                             deleteProduct(id)
                         }} itemToEdit={() => {
                             {productToEdit(product)};

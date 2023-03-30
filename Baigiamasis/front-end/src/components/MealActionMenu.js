@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import {useState} from "react";
+import ItemActionMenuButton from "./ItemActionMenuButton";
 
-const ItemActionMenu = ({itemToEdit,deleteItem}) => {
+const MealActionMenu = ({itemToEdit,deleteItem, openSearchBarForm}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
     const handleClick = (event) => {
@@ -34,11 +34,13 @@ const ItemActionMenu = ({itemToEdit,deleteItem}) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={itemToEdit}>Edit</MenuItem>
-                <MenuItem onClick={deleteItem}>Remove</MenuItem>
+                <ItemActionMenuButton action={itemToEdit} buttonName={"Edit"}/>
+                <ItemActionMenuButton action={openSearchBarForm} buttonName={"Add products"}/>
+                <ItemActionMenuButton action={null} buttonName={"Remove products"}/>
+                <ItemActionMenuButton action={deleteItem} buttonName={"Delete"}/>
             </Menu>
         </>
     );
 }
 
-export default ItemActionMenu
+export default MealActionMenu

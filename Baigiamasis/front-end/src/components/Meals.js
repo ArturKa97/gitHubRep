@@ -16,7 +16,7 @@ const Meals = () => {
     const [alertOpen, setAlertOpen] = useState(false);
 
     const mealElement = meals.map((listMeal, i) => (
-            <MealCard key={i} meal={listMeal} products={listMeal.products} refetchMeals={refetch} openAlert={setAlertOpen}  mealToEdit={setEditMeal}
+            <MealCard key={i} meal={listMeal} mealProducts={listMeal.products} refetchMeals={refetch} openAlert={setAlertOpen}  mealToEdit={setEditMeal}
                       openForm={setOpenFormDialog}/>
     ))
 

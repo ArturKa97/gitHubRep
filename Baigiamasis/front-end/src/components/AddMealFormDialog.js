@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import {useState} from "react";
 import {Field, Formik} from "formik";
 import TextField from "@mui/material/TextField";
-import {Alert, LinearProgress, Snackbar} from "@mui/material";
+import {LinearProgress} from "@mui/material";
 import Box from "@mui/material/Box";
 import {useCreateMeal} from "../api/mealsApi";
 import SnackbarAlert from "./SnackbarAlert";

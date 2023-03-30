@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/day")
 @CrossOrigin
 public class DayOfEatingController {
+
     private final DayOfEatingService dayOfEatingService;
 
     @GetMapping

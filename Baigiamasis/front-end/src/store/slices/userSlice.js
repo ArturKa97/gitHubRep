@@ -8,6 +8,9 @@ const userSlice = createSlice({
         reducers: {
             userLoggedIn(user, {payload: userWithValues}) {
                 return userWithValues;
+            },
+            userLoggedOut(){
+                return initialState
             }
 
         }

@@ -64,9 +64,12 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, alertType, alert
     // let allIceCream = [...products, ...mealProducts];
     // allIceCream.filter((item, index) => allIceCream.indexOf(item) === index)
 
-    const productList = mealProducts.map((listProduct, i) => (
+    const productList =mealProducts.map((listProduct, i) => (
         <Box key={i}> {listProduct.name} </Box>
     ))
+    const emptyProductList = !mealProducts.length && (
+        <Box> No products added </Box>
+    )
 
     const totals = mealProducts.reduce((total, product) => {
             total.calories += product.calories
@@ -157,7 +160,7 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, alertType, alert
                         <NutritionListItem nutrvalue={"Fat: " + totals.fat + " g"}/>
                     </Box>
                     <Typography paragraph>Product List:</Typography>
-                    {productList}
+                    {emptyProductList ||productList}
                 </CardContent>
             </Collapse>
         </Card>

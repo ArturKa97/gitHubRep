@@ -29,7 +29,16 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const DayOfEatingCard = ({dayOfEating, mealsOfDay, refetchDays, openAlert, alertType, alertMessage, dayToEdit, openForm}) => {
+const DayOfEatingCard = ({
+                             dayOfEating,
+                             mealsOfDay,
+                             refetchDays,
+                             openAlert,
+                             alertType,
+                             alertMessage,
+                             dayToEdit,
+                             openForm
+                         }) => {
     const [expanded, setExpanded] = useState(false);
     const [openAddFormDialog, setOpenAddFormDialog] = useState(false);
     const [openRemoveFormDialog, setOpenRemoveFormDialog] = useState(false);
@@ -63,9 +72,13 @@ const DayOfEatingCard = ({dayOfEating, mealsOfDay, refetchDays, openAlert, alert
     const mealList = mealsOfDay.map((listMeal, i) => (
         <Box key={i}> {listMeal.name} </Box>
     ))
+    const emptyMealList = !mealsOfDay.length && (
+        <Box> No meals added </Box>
+    )
 
-    let productValues = mealsOfDay.map((meal) => meal);
-    const totals = productValues.reduce((total, product) => {
+
+    let results = mealsOfDay.map(x => x.products).flat();
+    const totals = results.reduce((total, product) => {
             total.calories += product.calories
             total.protein += product.carbs
             total.carbs += product.calories
@@ -97,10 +110,10 @@ const DayOfEatingCard = ({dayOfEating, mealsOfDay, refetchDays, openAlert, alert
             margin: 2
         }}>
             <AddMealSearchDialog itemData={meals} open={openAddFormDialog}
-                                    onClose={() => setOpenAddFormDialog(false)} itemId={id} action={addMealToDayOfEating}/>
+                                 onClose={() => setOpenAddFormDialog(false)} itemId={id} action={addMealToDayOfEating}/>
             <RemoveMealSearchDialog itemData={mealsOfDay} open={openRemoveFormDialog}
-                                       onClose={() => setOpenRemoveFormDialog(false)} itemId={id}
-                                       action={removeMealFromDayOfEating}/>
+                                    onClose={() => setOpenRemoveFormDialog(false)} itemId={id}
+                                    action={removeMealFromDayOfEating}/>
             <CardHeader
                 action={
                     <DayOfEatingActionMenu deleteItem={() => {
@@ -145,7 +158,7 @@ const DayOfEatingCard = ({dayOfEating, mealsOfDay, refetchDays, openAlert, alert
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Total Nutrition Values:</Typography>
+                    <Typography paragraph> Total Nutrition Values:</Typography>
                     <Box>
                         <NutritionListItem nutrvalue={"Calories: " + totals.calories + " kcal"}/>
                         <NutritionListItem nutrvalue={"Protein: " + totals.protein + " g"}/>
@@ -154,7 +167,7 @@ const DayOfEatingCard = ({dayOfEating, mealsOfDay, refetchDays, openAlert, alert
                         <NutritionListItem nutrvalue={"Fat: " + totals.fat + " g"}/>
                     </Box>
                     <Typography paragraph>Meal List:</Typography>
-                    {mealList}
+                    {emptyMealList || mealList}
                 </CardContent>
             </Collapse>
         </Card>

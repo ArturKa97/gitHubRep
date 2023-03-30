@@ -8,6 +8,7 @@ import AddCard from "./AddCard";
 import {useState} from "react";
 import AddMealFormDialog from "./AddMealFormDialog";
 import SnackbarAlert from "./SnackbarAlert";
+import Typography from "@mui/material/Typography";
 
 const Meals = () => {
     const {isFetching, refetch, meals = []} = useMeals();
@@ -26,26 +27,30 @@ const Meals = () => {
     const loadingElement = isFetching && (
         <CircularProgress color="inherit"/>
     );
+    const noMealsElement = !meals.length && (
+       <Typography variant='h4' sx={{
+           display: "flex",
+           alignItems: "center",
+           justifyContent: "center"
+       }}>No meals found</Typography>
+    );
 
 
     return (
         <>
             <Box sx={{
-                display: 'inline-flex',
+                display: "flex",
                 flexWrap: 'wrap',
-                alignItems: 'center',
+                alignItems: "center",
+                justifyContent: "center",
                 margin: 1,
-                marginLeft: 6
             }}>
                 <AddCard openForm={setOpenFormDialog} resetForm={setEditMeal}/>
                 <AddMealFormDialog refetchItems={refetch} open={openFormDialog}
                                    onClose={() => setOpenFormDialog(false)} meal={editMeal}/>
-                {loadingElement || mealElement}
+                {loadingElement || noMealsElement || mealElement}
             </Box>
             <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={alertType} message={alertMessage}/>
-            <Button onClick={refetch}>
-                Test
-            </Button>
         </>
     )
 }

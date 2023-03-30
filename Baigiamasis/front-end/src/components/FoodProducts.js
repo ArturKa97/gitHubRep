@@ -8,6 +8,7 @@ import AddCard from "./AddCard"
 import {useState} from "react";
 import AddProductFormDialog from "./AddProductFormDialog";
 import SnackbarAlert from "./SnackbarAlert";
+import Typography from "@mui/material/Typography";
 
 const FoodProducts = () => {
 
@@ -24,23 +25,28 @@ const FoodProducts = () => {
     const loadingElement = isFetching && (
         <CircularProgress color="inherit"/>
     );
+    const noProductElement = !products.length && (
+        <Typography variant='h4' sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }}>No products found</Typography>
+    );
+
 
     return (
         <>
             <Box sx={{
-                display: 'inline-flex',
+                display: "flex",
                 flexWrap: 'wrap',
-                alignItems: 'center',
+                alignItems: "center",
+                justifyContent: "center",
                 margin: 1,
-                marginLeft: 6
             }}>
                 <AddCard openForm={setOpenFormDialog} resetForm={setEditProduct}/>
                 <AddProductFormDialog refetchItems={refetch} open={openFormDialog}
                                       onClose={() => setOpenFormDialog(false)} product={editProduct}/>
-                {loadingElement || foodProductsElement}
-                <Button onClick={refetch}>
-                    Test
-                </Button>
+                {loadingElement || noProductElement || foodProductsElement}
             </Box>
             <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"info"} message={"Product deleted!"}/>
         </>

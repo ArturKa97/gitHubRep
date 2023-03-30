@@ -1,9 +1,9 @@
 import HTTP from "./"
 import {useMutation, useQuery} from "react-query";
 
-const createMeal = (meal) => HTTP.post("/meals/add", {...meal, name: meal.mealName})
+const createMeal = (meal) => HTTP.post("/meals", {...meal, name: meal.mealName})
 
-const getMeals = () => HTTP.get("meals/all")
+const getMeals = () => HTTP.get("/meals")
     .then(response => response.data)
 
 const useMeals = () => {

@@ -1,9 +1,9 @@
 import HTTP from "./"
 import {useMutation, useQuery} from "react-query";
 
-const createProduct = (product) => HTTP.post("/products/add", {...product, name: product.productName})
+const createProduct = (product) => HTTP.post("/products", {...product, name: product.productName})
 
-const getProducts = () => HTTP.get("products/all")
+const getProducts = () => HTTP.get("/products")
     .then(response => response.data)
 
 const useProducts = () => {

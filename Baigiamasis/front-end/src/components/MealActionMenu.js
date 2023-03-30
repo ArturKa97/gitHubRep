@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import {useState} from "react";
 import ItemActionMenuButton from "./ItemActionMenuButton";
 
-const MealActionMenu = ({itemToEdit,deleteItem, openSearchBarForm}) => {
+const MealActionMenu = ({itemToEdit,deleteItem, openSearchBarAddForm, openSearchBarRemoveForm}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
     const handleClick = (event) => {
@@ -35,8 +35,8 @@ const MealActionMenu = ({itemToEdit,deleteItem, openSearchBarForm}) => {
                 }}
             >
                 <ItemActionMenuButton action={itemToEdit} buttonName={"Edit"}/>
-                <ItemActionMenuButton action={openSearchBarForm} buttonName={"Add products"}/>
-                <ItemActionMenuButton action={null} buttonName={"Remove products"}/>
+                <ItemActionMenuButton action={openSearchBarAddForm} buttonName={"Add products"}/>
+                <ItemActionMenuButton action={openSearchBarRemoveForm} buttonName={"Remove products"}/>
                 <ItemActionMenuButton action={deleteItem} buttonName={"Delete"}/>
             </Menu>
         </>

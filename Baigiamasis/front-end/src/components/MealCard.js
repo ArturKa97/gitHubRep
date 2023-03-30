@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -15,12 +15,13 @@ import Box from "@mui/material/Box";
 import HTTP from "../api";
 import MealActionMenu from "./MealActionMenu";
 import {useProducts} from "../api/productsApi";
-import SearchBarDialog from "./SearchBarDialog";
+import AddProductSearchDialog from "./AddProductSearchDialog";
+import RemoveProductSearchDialog from "./RemoveProductSearchDialog";
 
 const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
+    const {expand, ...other} = props;
     return <IconButton {...other} />;
-})(({ theme, expand }) => ({
+})(({theme, expand}) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
@@ -30,11 +31,16 @@ const ExpandMore = styled((props) => {
 
 const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, openForm}) => {
     const [expanded, setExpanded] = useState(false);
-    const [openFormDialog, setOpenFormDialog] = useState(false);
+    const [openAddFormDialog, setOpenAddFormDialog] = useState(false);
+    const [openRemoveFormDialog, setOpenRemoveFormDialog] = useState(false);
     const {id, name, description} = meal;
 
-    const addProductToMeal = async (product , mealId) => {
+    const addProductToMeal = async (product, mealId) => {
         await HTTP.post(`/meals/${mealId}`, product);
+        await refetchMeals();
+    };
+    const removeProductFromMeal = async (product, mealId) => {
+        await HTTP.patch(`/meals/${mealId}`, product);
         await refetchMeals();
     };
 
@@ -44,20 +50,20 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, open
         await openAlert(true)
 
     };
-    let {products=[]} = useProducts();
+    let {products = []} = useProducts();
 
-    const productList= mealProducts.map((listProduct, i) => (
+    const productList = mealProducts.map((listProduct, i) => (
         <Box key={i}> {listProduct.name} </Box>
     ))
 
-    const totals = mealProducts.reduce((total, product)=> {
+    const totals = mealProducts.reduce((total, product) => {
             total.calories += product.calories
             total.protein += product.carbs
             total.carbs += product.calories
             total.sugar += product.carbs
             total.fat += product.calories
 
-        return total
+            return total
         },
         {
             calories: 0,
@@ -66,7 +72,7 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, open
             sugar: 0,
             fat: 0
         }
-        )
+    )
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -74,23 +80,35 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, open
 
 
     return (
-        <Card sx={{ maxWidth: 220,
+        <Card sx={{
+            maxWidth: 220,
             width: 220,
             border: 2,
             borderRadius: '16px',
-            margin: 2 }}>
-            <SearchBarDialog itemData={products} open={openFormDialog}
-                             onClose={() => setOpenFormDialog(false)} itemId={id} action={addProductToMeal}/>
+            margin: 2
+        }}>
+            <AddProductSearchDialog itemData={products} open={openAddFormDialog}
+                                    onClose={() => setOpenAddFormDialog(false)} itemId={id} action={addProductToMeal}/>
+            <RemoveProductSearchDialog itemData={mealProducts} open={openRemoveFormDialog}
+                                       onClose={() => setOpenRemoveFormDialog(false)} itemId={id}
+                                       action={removeProductFromMeal}/>
             <CardHeader
                 action={
                     <MealActionMenu deleteItem={() => {
                         deleteMeal(id)
                     }} itemToEdit={() => {
                         mealToEdit(meal);
-                        openForm(true)}
-                    } openSearchBarForm={() => {
-                    setOpenFormDialog(true)}
+                        openForm(true)
                     }
+                    } openSearchBarAddForm={() => {
+                        setOpenAddFormDialog(true)
+                    }
+                    } openSearchBarRemoveForm={() => {
+                        setOpenRemoveFormDialog(true)
+                    }
+                    }
+
+
                     />
                 }
                 title={name}
@@ -113,18 +131,18 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, open
                     aria-expanded={expanded}
                     aria-label="show more"
                 >
-                    <ExpandMoreIcon />
+                    <ExpandMoreIcon/>
                 </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>Total Nutrition Values:</Typography>
                     <Box>
-                    <NutritionListItem nutrvalue={"Calories: " + totals.calories + " kcal"}/>
-                    <NutritionListItem nutrvalue={"Protein: " + totals.protein + " g"}/>
-                    <NutritionListItem nutrvalue={"Carbs: " + totals.carbs + " g"}/>
-                    <NutritionListItem nutrvalue={"Sugar: " + totals.sugar + " g"}/>
-                    <NutritionListItem nutrvalue={"Fat: " + totals.fat + " g"}/>
+                        <NutritionListItem nutrvalue={"Calories: " + totals.calories + " kcal"}/>
+                        <NutritionListItem nutrvalue={"Protein: " + totals.protein + " g"}/>
+                        <NutritionListItem nutrvalue={"Carbs: " + totals.carbs + " g"}/>
+                        <NutritionListItem nutrvalue={"Sugar: " + totals.sugar + " g"}/>
+                        <NutritionListItem nutrvalue={"Fat: " + totals.fat + " g"}/>
                     </Box>
                     <Typography paragraph>Product List:</Typography>
                     {productList}

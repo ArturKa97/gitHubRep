@@ -8,7 +8,7 @@ import {useState} from "react";
 import SnackbarAlert from "./SnackbarAlert";
 import SearchBar from "./SearchBar";
 
-const SearchBarDialog = ({open, onClose, itemData, itemId , action}) => {
+const AddProductSearchDialog = ({open, onClose, itemData, itemId , action}) => {
 
     const [alertOpen, setAlertOpen] = useState(false);
     const [selectedItems, setSelectedItems] = useState([])
@@ -30,4 +30,4 @@ const SearchBarDialog = ({open, onClose, itemData, itemId , action}) => {
         </>
     );
 }
-export default SearchBarDialog
+export default AddProductSearchDialog

@@ -12,6 +12,7 @@ const AddCard = ({openForm, resetForm}) => (
         border: 2,
         borderRadius: '16px',
         margin: 2,
+
     }}>
         <CardActionArea
             onClick={() => {
@@ -23,6 +24,9 @@ const AddCard = ({openForm, resetForm}) => (
                 width: 220,
                 maxHeight: 320,
                 height: 320,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
             }}>
             <AddCircleTwoToneIcon sx={{
                 maxWidth: 120,

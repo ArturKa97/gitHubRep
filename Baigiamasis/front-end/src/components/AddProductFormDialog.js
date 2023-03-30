@@ -75,6 +75,8 @@ const AddProductFormDialog = ({refetchItems, open, onClose, product}) => {
     const [alertOpen, setAlertOpen] = useState(false);
 
     const title = product ? "Edit Food Product" : "Add New Food Product"
+    const buttonName =  product ? "Edit" : "Add"
+    const message = product? "Product edited!":  "Product added!"
     return (
         <>
             <Dialog open={open} onClose={onClose}>
@@ -146,7 +148,7 @@ const AddProductFormDialog = ({refetchItems, open, onClose, product}) => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button variant="outlined" type="submit" disabled={isSubmitting}
-                                            onClick={submitForm}>Add</Button>
+                                            onClick={submitForm}>{buttonName}</Button>
                                     <Button onClick={onClose}>Cancel</Button>
                                 </DialogActions>
                             </>
@@ -154,7 +156,7 @@ const AddProductFormDialog = ({refetchItems, open, onClose, product}) => {
                     }}
                 </Formik>
             </Dialog>
-            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={"Product added!"}/>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={message}/>
         </>
     );
 }

@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, openForm}) => {
+const MealCard = ({meal, mealProducts, refetchMeals, openAlert, alertType, alertMessage, mealToEdit, openForm}) => {
     const [expanded, setExpanded] = useState(false);
     const [openAddFormDialog, setOpenAddFormDialog] = useState(false);
     const [openRemoveFormDialog, setOpenRemoveFormDialog] = useState(false);
@@ -37,20 +37,32 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, mealToEdit, open
 
     const addProductToMeal = async (product, mealId) => {
         await HTTP.post(`/meals/${mealId}`, product);
-        await refetchMeals();
+        await alertType("success")
+        await alertMessage("Product(s) added!")
+        await refetchMeals()
+        await openAlert(true)
     };
     const removeProductFromMeal = async (product, mealId) => {
         await HTTP.patch(`/meals/${mealId}`, product);
+        await alertType("info")
+        await alertMessage("Product(s) removed!")
         await refetchMeals();
+        await openAlert(true)
     };
 
     const deleteMeal = async (mealId) => {
         await HTTP.delete(`/meals/${mealId}`);
+        await alertType("info")
+        await alertMessage("Meal deleted!")
         await refetchMeals();
         await openAlert(true)
 
     };
-    let {products = []} = useProducts();
+    const {products = []} = useProducts();
+    // const uniqueProducts = new Set([...products, ...mealProducts]);
+    // const uniqueProductsSet  = [...uniqueProducts];
+    // let allIceCream = [...products, ...mealProducts];
+    // allIceCream.filter((item, index) => allIceCream.indexOf(item) === index)
 
     const productList = mealProducts.map((listProduct, i) => (
         <Box key={i}> {listProduct.name} </Box>

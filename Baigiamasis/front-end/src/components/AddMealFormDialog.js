@@ -42,6 +42,8 @@ const AddMealFormDialog = ({refetchItems, open, onClose, meal}) => {
     const [alertOpen, setAlertOpen] = useState(false);
 
     const title = meal ? "Edit Meal" : "Add New Meal"
+    const buttonName = meal ? "Edit" : "Add"
+    const message = meal ? "Meal edited!" : "Meal added!"
 
     return (
         <>
@@ -82,7 +84,7 @@ const AddMealFormDialog = ({refetchItems, open, onClose, meal}) => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button variant="outlined" type="submit" disabled={isSubmitting}
-                                            onClick={submitForm}>Add</Button>
+                                            onClick={submitForm}>{buttonName}</Button>
                                     <Button onClick={onClose}>Cancel</Button>
                                 </DialogActions>
                             </>
@@ -90,7 +92,7 @@ const AddMealFormDialog = ({refetchItems, open, onClose, meal}) => {
                     }}
                 </Formik>
             </Dialog>
-            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={"Meal added!"}/>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={message}/>
         </>
     );
 }

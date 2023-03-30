@@ -14,9 +14,12 @@ const Meals = () => {
     const [openFormDialog, setOpenFormDialog] = useState(false);
     const [editMeal, setEditMeal] = useState(null);
     const [alertOpen, setAlertOpen] = useState(false);
+    const [alertType, setAlertType] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
 
     const mealElement = meals.map((listMeal, i) => (
-            <MealCard key={i} meal={listMeal} mealProducts={listMeal.products} refetchMeals={refetch} openAlert={setAlertOpen}  mealToEdit={setEditMeal}
+            <MealCard key={i} meal={listMeal} mealProducts={listMeal.products} refetchMeals={refetch} openAlert={setAlertOpen}
+                      alertType={setAlertType} alertMessage={setAlertMessage} mealToEdit={setEditMeal}
                       openForm={setOpenFormDialog}/>
     ))
 
@@ -39,7 +42,7 @@ const Meals = () => {
                                    onClose={() => setOpenFormDialog(false)} meal={editMeal}/>
                 {loadingElement || mealElement}
             </Box>
-            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"info"} message={"Meal deleted!"}/>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={alertType} message={alertMessage}/>
             <Button onClick={refetch}>
                 Test
             </Button>

@@ -47,6 +47,15 @@ function AppHeader() {
             >
               {'Meals'}
             </Button>
+            <Button
+                color="inherit"
+                variant="h6"
+                underline="none"
+                onClick={() => navigate("/days")}
+                sx={rightLink}
+            >
+              {'Days Of Eating'}
+            </Button>
             <Link
               color="inherit"
               variant="h6"

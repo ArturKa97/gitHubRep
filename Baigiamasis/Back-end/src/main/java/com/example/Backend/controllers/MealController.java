@@ -15,12 +15,12 @@ public class MealController {
 
     private final MealService mealService;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Meal> getAllMeals() {
         return mealService.getAllMeals();
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void addMeal(@RequestBody Meal meal) {
         mealService.addMeal(meal);
     }

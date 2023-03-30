@@ -21,14 +21,14 @@ public class FoodProductController {
     public FoodProductController(FoodProductService foodProductService) {
         this.foodProductService = foodProductService;
     }
-    @GetMapping("/all")
+    @GetMapping
     public List<FoodProduct> getAllProducts () {
         return foodProductService.getAllProducts();
     }
 
-    @PostMapping("/add")
-    public FoodProduct addProduct (@RequestBody @Valid FoodProduct foodProduct) {
-        return foodProductService.addProduct(foodProduct);
+    @PostMapping
+    public void addProduct (@RequestBody @Valid FoodProduct foodProduct) {
+        foodProductService.addProduct(foodProduct);
     }
     @GetMapping("/{id}")
     public FoodProduct getProductById (@PathVariable(value = "id") Long id) {

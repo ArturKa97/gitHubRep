@@ -7,7 +7,7 @@ import java.util.List;
 public interface FoodProductService {
     List<FoodProduct> getAllProducts();
 
-    FoodProduct addProduct(FoodProduct foodProduct);
+    void addProduct(FoodProduct foodProduct);
 
     FoodProduct getProductById(Long id);
 

@@ -21,8 +21,8 @@ public class FoodProductServiceImpl implements FoodProductService {
     }
 
     @Override
-    public FoodProduct addProduct(FoodProduct foodProduct) {
-        return foodProductRepository.save(foodProduct);
+    public void addProduct(FoodProduct foodProduct) {
+        foodProductRepository.save(foodProduct);
 
     }
 

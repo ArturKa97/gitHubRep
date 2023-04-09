@@ -14,7 +14,7 @@ import SnackbarAlert from "./SnackbarAlert";
 import {useAddDayOfEating} from "../api/dayOfEatingApi";
 
 const validationSchema = Yup.object().shape({
-        mealName: Yup.string()
+        dayOfEatingName: Yup.string()
             .min(2, ({label, min}) => `${label} must contain more than ${min} chars!`)
             .max(20, ({label, max}) => `${label} must contain less than ${max} chars!`)
             .required()

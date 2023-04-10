@@ -22,7 +22,8 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .requestMatchers(
-                        "/products/*"
+                        "/products/*",
+                        "/user/login"
                 ).permitAll();
 
 

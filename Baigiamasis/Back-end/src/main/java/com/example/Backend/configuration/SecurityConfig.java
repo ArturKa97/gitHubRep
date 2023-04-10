@@ -19,6 +19,12 @@ public class SecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        http
+                .authorizeRequests()
+                .requestMatchers(
+                        "/products/*"
+                ).permitAll();
+
 
 
         return http.build();

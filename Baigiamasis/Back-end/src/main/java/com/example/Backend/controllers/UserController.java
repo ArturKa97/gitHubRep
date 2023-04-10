@@ -15,7 +15,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+    public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
         System.out.println(loginRequest);
         return null;
     }

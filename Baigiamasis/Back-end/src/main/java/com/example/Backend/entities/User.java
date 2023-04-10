@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @EqualsAndHashCode
 @Getter
@@ -18,6 +20,13 @@ public class User {
     private Long id;
 
     @NotBlank
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @NotBlank
     @Column(name = "email")
     private String email;
 
@@ -25,11 +34,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @NotBlank
-    @Column(name = "role")
-    private String role;
-
-
-
+    @ManyToMany
+    private Set<Role> roles;
 
 }

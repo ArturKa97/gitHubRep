@@ -4,6 +4,7 @@ import com.example.Backend.dto.LoginResponse;
 import com.example.Backend.dto.UserDto;
 import com.example.Backend.entities.User;
 import com.example.Backend.entities.Role;
+import com.example.Backend.services.JwtService;
 import com.example.Backend.services.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -15,15 +16,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
-@RestController
-@RequiredArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
+@RestController
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
 
     private AuthenticationManager authenticationManager;
     private UserService userService;
+    private JwtService jwtService;
 
     public UserController(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -51,7 +53,7 @@ public class UserController {
     }
 
     private String generateJwt(User user) {
-        return null;
+        return jwtService.createToken(user);
     }
 
     private User authenticate(LoginRequest loginRequest) {

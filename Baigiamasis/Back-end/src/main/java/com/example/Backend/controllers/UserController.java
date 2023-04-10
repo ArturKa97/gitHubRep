@@ -38,8 +38,4 @@ public class UserController {
         userService.addUser(user);
 
     }
-    @GetMapping
-    public User getUser(String userEmail) {
-        return userService.getUser(userEmail);
-    }
 }

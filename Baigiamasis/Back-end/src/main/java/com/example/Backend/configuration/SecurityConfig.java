@@ -24,7 +24,9 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/products/*",
                         "/user/login"
-                ).permitAll();
+                ).permitAll()
+                .anyRequest()
+                .authenticated();
 
 
 

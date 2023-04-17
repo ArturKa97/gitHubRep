@@ -37,14 +37,8 @@ public class Meal {
 
     public void addProduct(List<FoodProduct> foodProducts) {
         this.products.addAll(foodProducts);
-
     }
     public void removeProduct(List<FoodProduct> foodProducts) {
-
         this.products.removeAll(foodProducts);
-
     }
-
-
-
 }

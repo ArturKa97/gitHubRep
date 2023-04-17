@@ -18,17 +18,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @NotBlank
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "surname")
-    private String surname;
 
     @NotBlank
     @Column(name = "email")
@@ -38,8 +32,15 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+    @ManyToMany (cascade = {CascadeType.MERGE, CascadeType.PERSIST })
     private Set<Role> roles;
+
+    public void addRoleToUser (Role role) {
+        this.roles.add(role);
+    }
+    public void removeRoleFromUser (Role role) {
+        this.roles.remove(role);
+    }
 
 
     @Override

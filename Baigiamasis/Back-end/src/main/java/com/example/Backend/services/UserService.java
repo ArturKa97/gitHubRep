@@ -4,4 +4,5 @@ import com.example.Backend.entities.User;
 
 public interface UserService {
     void addUser (User user);
+    void removeUser (Long id);
 }

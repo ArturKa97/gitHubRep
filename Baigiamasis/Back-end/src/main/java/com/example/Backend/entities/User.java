@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -33,7 +34,8 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany (cascade = {CascadeType.MERGE, CascadeType.PERSIST })
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
+
 
     public void addRoleToUser (Role role) {
         this.roles.add(role);

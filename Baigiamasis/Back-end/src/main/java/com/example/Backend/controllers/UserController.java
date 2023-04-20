@@ -35,6 +35,11 @@ public class UserController {
         userService.removeUser(id);
     }
 
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable(value = "id") Long id){
+        return userService.getUserById(id);
+    }
+
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
 

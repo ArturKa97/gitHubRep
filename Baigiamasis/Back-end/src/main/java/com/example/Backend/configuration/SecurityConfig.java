@@ -29,7 +29,7 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .requestMatchers(
-                        "/products/*",
+                        "/products/**",
                         "/user/**"
                 ).permitAll()
                 .anyRequest()

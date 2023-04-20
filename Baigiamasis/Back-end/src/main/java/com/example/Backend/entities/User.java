@@ -14,7 +14,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @Getter
 @Setter
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +26,7 @@ public class User implements UserDetails {
     private Long id;
 
     @NotBlank
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @NotBlank

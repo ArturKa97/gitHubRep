@@ -44,6 +44,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public void removeRoleFromUser(Long id, String roleToRemove) {
+        User user = getUserById(id);
+        Role role = roleRepository.findByRole(roleToRemove);
+        user.removeRoleFromUser(role);
+        userRepository.save(user);
+    }
+
+    @Override
     public User loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User not found [email=%s]", email)));

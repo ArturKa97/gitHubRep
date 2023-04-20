@@ -7,4 +7,5 @@ public interface UserService {
     void removeUser (Long id);
     User getUserById (Long id);
     void addRoleToUser (Long id, String roleToAdd);
+    void removeRoleFromUser(Long id, String roleToRemove);
 }

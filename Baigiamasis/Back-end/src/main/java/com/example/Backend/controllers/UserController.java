@@ -45,6 +45,12 @@ public class UserController {
         userService.addRoleToUser(id, roleToAdd);
     }
 
+    @PatchMapping("/{id}")
+    public void removeRoleFromUser(@RequestBody String roleToRemove, @PathVariable(value = "id") Long id) {
+        userService.removeRoleFromUser(id, roleToRemove);
+    }
+
+
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
 

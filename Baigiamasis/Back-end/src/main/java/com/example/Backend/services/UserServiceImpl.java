@@ -29,16 +29,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.deleteById(id);
     }
 
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.getUserById(id);
+    }
+
+    @Override
     public void addRoleToUser(Long id, String roleToAdd) {
         User user = getUserById(id);
         Role role = roleRepository.findByRole(roleToAdd);
         user.addRoleToUser(role);
         userRepository.save(user);
-    }
-
-    @Override
-    public User getUserById(Long id) {
-        return userRepository.getUserById(id);
     }
 
     @Override

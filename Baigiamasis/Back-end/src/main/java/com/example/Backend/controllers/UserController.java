@@ -40,6 +40,11 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @PostMapping("/{id}")
+    public void addRoleToUser(@RequestBody String roleToAdd, @PathVariable(value = "id") Long id) {
+        userService.addRoleToUser(id, roleToAdd);
+    }
+
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
 

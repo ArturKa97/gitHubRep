@@ -56,23 +56,24 @@ function AppHeader() {
             >
               {'Days Of Eating'}
             </Button>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              href="/premium-themes/onepirate/sign-in/"
-              sx={rightLink}
+            <Button
+                color="inherit"
+                variant="h6"
+                underline="none"
+                onClick={() => navigate("/login")}
+                sx={rightLink}
             >
-              {'Sign In'}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              href="/premium-themes/onepirate/sign-up/"
-              sx={{ ...rightLink, color: 'secondary.main' }}
+              {'Log In'}
+            </Button>
+            <Button
+                color="inherit"
+                variant="h6"
+                underline="none"
+                onClick={() => navigate("/register")}
+                sx={rightLink}
             >
-              {'Sign Up'}
-            </Link>
+              {'Register'}
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

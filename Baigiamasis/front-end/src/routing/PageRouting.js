@@ -3,6 +3,7 @@ import ProductHero from "../pageLayout/ProductHero";
 import FoodProducts from "../components/FoodProducts";
 import Meals from "../components/Meals";
 import DaysOfEating from "../components/DaysOfEating";
+import LoginForm from "../components/LoginForm";
 
 const PageRouting = () => (
     <Routes>
@@ -10,7 +11,7 @@ const PageRouting = () => (
         <Route path="/foodproducts" element={<FoodProducts/>}/>
         <Route path="/meals" element={<Meals/>}/>
         <Route path="/days" element={<DaysOfEating/>}/>
-
+        <Route path="/login" element={<LoginForm/>}/>
     </Routes>
 )
 export default PageRouting;

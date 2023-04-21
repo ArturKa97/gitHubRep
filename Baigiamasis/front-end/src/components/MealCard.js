@@ -59,10 +59,7 @@ const MealCard = ({meal, mealProducts, refetchMeals, openAlert, alertType, alert
 
     };
     const {products = []} = useProducts();
-    // const uniqueProducts = new Set([...products, ...mealProducts]);
-    // const uniqueProductsSet  = [...uniqueProducts];
-    // let allIceCream = [...products, ...mealProducts];
-    // allIceCream.filter((item, index) => allIceCream.indexOf(item) === index)
+
 
     const productList =mealProducts.map((listProduct, i) => (
         <Box key={i}> {listProduct.name} </Box>

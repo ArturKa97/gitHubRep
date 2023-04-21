@@ -1,61 +1,23 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const rightLink = {
-  fontSize: 16,
-  color: 'common.white',
-  ml: 3,
+    fontSize: 16,
+    color: 'common.white',
+    ml: 3,
 };
 
-function AppHeader() {
-  const navigate = useNavigate();
+const AppHeader = () => {
+    const navigate = useNavigate();
+    const user = useSelector(({userSlice}) => userSlice?.userDto);
 
-  return (
-    <>
-      <AppBar position="fixed">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-                color="inherit"
-                variant="h6"
-                underline="none"
-                onClick={() => navigate("/")}
-                sx={rightLink}
-            >
-              {'Home'}
-            </Button>
-            <Button
-                color="inherit"
-                variant="h6"
-                underline="none"
-                onClick={() => navigate("/foodproducts")}
-                sx={rightLink}
-            >
-              {'Food Products'}
-            </Button>
-            <Button
-                color="inherit"
-                variant="h6"
-                underline="none"
-                onClick={() => navigate("/meals")}
-                sx={rightLink}
-            >
-              {'Meals'}
-            </Button>
-            <Button
-                color="inherit"
-                variant="h6"
-                underline="none"
-                onClick={() => navigate("/days")}
-                sx={rightLink}
-            >
-              {'Days Of Eating'}
-            </Button>
+    const loginAndRegisterButtons =!user && (
+        <>
             <Button
                 color="inherit"
                 variant="h6"
@@ -63,7 +25,7 @@ function AppHeader() {
                 onClick={() => navigate("/login")}
                 sx={rightLink}
             >
-              {'Log In'}
+                {'Log In'}
             </Button>
             <Button
                 color="inherit"
@@ -72,14 +34,60 @@ function AppHeader() {
                 onClick={() => navigate("/register")}
                 sx={rightLink}
             >
-              {'Register'}
+                {'Register'}
             </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
-    </>
-  );
+        </>
+    )
+
+
+    return (
+        <>
+            <AppBar position="fixed">
+                <Toolbar sx={{justifyContent: 'space-between'}}>
+                    <Box sx={{flex: 1, display: 'flex', justifyContent: 'flex-end'}}>
+                        <Button
+                            color="inherit"
+                            variant="h6"
+                            underline="none"
+                            onClick={() => navigate("/")}
+                            sx={rightLink}
+                        >
+                            {'Home'}
+                        </Button>
+                        <Button
+                            color="inherit"
+                            variant="h6"
+                            underline="none"
+                            onClick={() => navigate("/foodproducts")}
+                            sx={rightLink}
+                        >
+                            {'Food Products'}
+                        </Button>
+                        <Button
+                            color="inherit"
+                            variant="h6"
+                            underline="none"
+                            onClick={() => navigate("/meals")}
+                            sx={rightLink}
+                        >
+                            {'Meals'}
+                        </Button>
+                        <Button
+                            color="inherit"
+                            variant="h6"
+                            underline="none"
+                            onClick={() => navigate("/days")}
+                            sx={rightLink}
+                        >
+                            {'Days Of Eating'}
+                        </Button>
+                      {loginAndRegisterButtons}
+                    </Box>
+                </Toolbar>
+            </AppBar>
+            <Toolbar/>
+        </>
+    );
 }
 
 export default AppHeader;

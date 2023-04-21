@@ -2,11 +2,28 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
+import {useSelector} from "react-redux";
 
 const backgroundImage =
   'https://images.ctfassets.net/4f3rgqwzdznj/7DnxFqiaGztCcNjPkzDr8Q/991d0db65a03f816b952acd927b4820c/fruit-veggies-meat-weights-1299421209.jpg';
 
-export default function ProductHero() {
+const ProductHero = () => {
+
+  const user = useSelector(({userSlice}) => userSlice?.userDto);
+
+  const registerButton = !user && (
+      <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          component="a"
+          href="/premium-themes/onepirate/sign-up/"
+          sx={{ minWidth: 200 }}
+      >
+        Register
+      </Button>
+  )
+
   return (
     <ProductHeroLayout
       sxBackground={{
@@ -32,16 +49,9 @@ export default function ProductHero() {
       >
         Set up your daily meals and track your daily calories
       </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
-        sx={{ minWidth: 200 }}
-      >
-        Register
-      </Button>
+      {registerButton}
     </ProductHeroLayout>
   );
 }
+
+export default ProductHero;

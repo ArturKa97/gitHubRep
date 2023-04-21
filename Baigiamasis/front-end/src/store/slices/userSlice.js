@@ -16,7 +16,7 @@ const userSlice = createSlice({
         }
     }
 )
-export const selectLoggedInUser = state => state.user?.userDto
+export const selectLoggedInUser = state => state.userSlice?.userDto
 
 export default userSlice.reducer;
 

@@ -32,7 +32,9 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(
                         "/products/**",
-                        "/user/**"
+                        "/user/**",
+                        "/meals/**",
+                        "/day/**"
                 ).permitAll()
                 .anyRequest()
                 .authenticated();

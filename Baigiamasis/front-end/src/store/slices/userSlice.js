@@ -6,8 +6,8 @@ const userSlice = createSlice({
         name: "userSlice",
         initialState,
         reducers: {
-            userLoggedIn(user, {payload: userWithValues}) {
-                return userWithValues;
+            userLoggedIn(userState, {payload: loggedInUser}) {
+                return loggedInUser;
             },
             userLoggedOut(){
                 return initialState

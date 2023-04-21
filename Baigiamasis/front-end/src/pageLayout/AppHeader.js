@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {userLoggedOut} from "../store/slices/userSlice";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import IconButton from "@mui/material/IconButton";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 const rightLink = {
     fontSize: 16,
@@ -36,7 +39,7 @@ const AppHeader = () => {
     )
 
 
-    const loginAndRegisterButtons =!user && (
+    const loginAndRegisterButtons = !user && (
         <>
             <Button
                 color="inherit"
@@ -57,6 +60,15 @@ const AppHeader = () => {
                 {'Register'}
             </Button>
         </>
+    )
+
+    const adminPanelButton = (
+        <IconButton
+            id="basic-button"
+            onClick={() => navigate("/admin")}
+        >
+            <AdminPanelSettingsIcon/>
+        </IconButton>
     )
 
 
@@ -101,7 +113,8 @@ const AppHeader = () => {
                         >
                             {'Days Of Eating'}
                         </Button>
-                      {loginAndRegisterButtons || logoutButton}
+                        {loginAndRegisterButtons || logoutButton}
+                        {adminPanelButton}
                     </Box>
                 </Toolbar>
             </AppBar>

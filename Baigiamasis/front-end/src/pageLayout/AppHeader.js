@@ -4,7 +4,8 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {userLoggedOut} from "../store/slices/userSlice";
 
 const rightLink = {
     fontSize: 16,
@@ -15,6 +16,25 @@ const rightLink = {
 const AppHeader = () => {
     const navigate = useNavigate();
     const user = useSelector(({userSlice}) => userSlice?.userDto);
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch(userLoggedOut())
+        navigate("/")
+    }
+
+    const logoutButton = (
+        <Button
+            color="inherit"
+            variant="h6"
+            underline="none"
+            onClick={logout}
+            sx={rightLink}
+        >
+            {'Log Out'}
+        </Button>
+    )
+
 
     const loginAndRegisterButtons =!user && (
         <>
@@ -81,7 +101,7 @@ const AppHeader = () => {
                         >
                             {'Days Of Eating'}
                         </Button>
-                      {loginAndRegisterButtons}
+                      {loginAndRegisterButtons || logoutButton}
                     </Box>
                 </Toolbar>
             </AppBar>

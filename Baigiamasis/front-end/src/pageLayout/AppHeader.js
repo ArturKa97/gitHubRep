@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {userLoggedOut} from "../store/slices/userSlice";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
@@ -62,7 +61,7 @@ const AppHeader = () => {
         </>
     )
 
-    const adminPanelButton = (
+    const adminPanelButton = user && user.roles.includes('ADMIN') && (
         <IconButton
             id="basic-button"
             onClick={() => navigate("/admin")}

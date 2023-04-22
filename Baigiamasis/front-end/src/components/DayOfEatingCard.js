@@ -80,10 +80,10 @@ const DayOfEatingCard = ({
     let results = mealsOfDay.map(x => x.products).flat();
     const totals = results.reduce((total, product) => {
             total.calories += product.calories
-            total.protein += product.carbs
-            total.carbs += product.calories
-            total.sugar += product.carbs
-            total.fat += product.calories
+            total.protein += product.protein
+            total.carbs += product.carbs
+            total.sugar += product.sugar
+            total.fat += product.fat
 
             return total
         },

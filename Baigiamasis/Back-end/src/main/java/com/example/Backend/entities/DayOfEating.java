@@ -20,12 +20,10 @@ public class DayOfEating {
 
     @NotBlank
     @Column(name = "name")
-    @EqualsAndHashCode.Exclude
     private String name;
 
     @NotBlank
     @Column(name = "decription")
-    @EqualsAndHashCode.Exclude
     private String description;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})

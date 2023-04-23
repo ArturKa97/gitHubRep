@@ -31,23 +31,19 @@ public class PersonalInfo {
     @Column(name = "surname")
     private String surname;
 
-    @NotBlank
     @Min(0)
     @Max(120)
     @Column(name = "age")
     private BigInteger age;
 
-    @NotBlank
     @Digits(integer = 3, fraction = 2)
     @Column(name = "height")
     private BigDecimal height;
 
-    @NotBlank
     @Digits(integer = 3, fraction = 2)
     @Column(name = "weight")
     private BigDecimal weight;
 
-    @NotBlank
     @Column(name = "bmi")
     private BigDecimal bmi;
 

@@ -2,6 +2,7 @@ package com.example.Backend.controllers;
 import com.example.Backend.dto.LoginRequest;
 import com.example.Backend.dto.LoginResponse;
 import com.example.Backend.dto.UserDto;
+import com.example.Backend.entities.PersonalInfo;
 import com.example.Backend.entities.User;
 import com.example.Backend.entities.Role;
 import com.example.Backend.services.JwtService;
@@ -40,14 +41,19 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/role/{id}")
     public void addRoleToUser(@RequestBody String roleToAdd, @PathVariable(value = "id") Long id) {
         userService.addRoleToUser(id, roleToAdd);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/role/{id}")
     public void removeRoleFromUser(@RequestBody String roleToRemove, @PathVariable(value = "id") Long id) {
         userService.removeRoleFromUser(id, roleToRemove);
+    }
+
+    @PostMapping("/{id}")
+    public void addPersonalInfo(@RequestBody PersonalInfo personalInfo, @PathVariable(value = "id") Long id) {
+        userService.addPersonalInfo(id, personalInfo);
     }
 
 

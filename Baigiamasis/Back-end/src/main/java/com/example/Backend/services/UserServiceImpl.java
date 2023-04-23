@@ -1,7 +1,9 @@
 package com.example.Backend.services;
 
+import com.example.Backend.entities.PersonalInfo;
 import com.example.Backend.entities.Role;
 import com.example.Backend.entities.User;
+import com.example.Backend.repositories.PersonalInfoRepository;
 import com.example.Backend.repositories.RoleRepository;
 import com.example.Backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PersonalInfoRepository personalInfoRepository;
 
     @Override
     public void addUser(User user) {
@@ -49,6 +52,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Role role = roleRepository.findByRole(roleToRemove);
         user.removeRoleFromUser(role);
         userRepository.save(user);
+    }
+
+    @Override
+    public void addPersonalInfo(Long id, PersonalInfo personalInfo) {
+        User user = getUserById(id);
+        personalInfo.setUser(user);
+        personalInfoRepository.save(personalInfo);
     }
 
     @Override

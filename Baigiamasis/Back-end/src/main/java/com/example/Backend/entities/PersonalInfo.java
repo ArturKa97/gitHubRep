@@ -20,7 +20,6 @@ import java.math.BigInteger;
 public class PersonalInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -51,4 +50,9 @@ public class PersonalInfo {
     @NotBlank
     @Column(name = "bmi")
     private BigDecimal bmi;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
 }

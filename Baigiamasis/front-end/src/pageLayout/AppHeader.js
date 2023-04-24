@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {userLoggedOut} from "../store/slices/userSlice";
 import IconButton from "@mui/material/IconButton";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import UserAccountMenu from "../components/UserAccountMenu";
 
 const rightLink = {
     fontSize: 16,
@@ -18,25 +19,6 @@ const rightLink = {
 const AppHeader = () => {
     const navigate = useNavigate();
     const user = useSelector(({userSlice}) => userSlice?.userDto);
-    const dispatch = useDispatch();
-
-    const logout = () => {
-        dispatch(userLoggedOut())
-        navigate("/")
-    }
-
-    const logoutButton = (
-        <Button
-            color="inherit"
-            variant="h6"
-            underline="none"
-            onClick={logout}
-            sx={rightLink}
-        >
-            {'Log Out'}
-        </Button>
-    )
-
 
     const loginAndRegisterButtons = !user && (
         <>
@@ -68,6 +50,10 @@ const AppHeader = () => {
         >
             <AdminPanelSettingsIcon/>
         </IconButton>
+    )
+
+    const userMenu = user && (
+        <UserAccountMenu/>
     )
 
 
@@ -112,8 +98,9 @@ const AppHeader = () => {
                         >
                             {'Days Of Eating'}
                         </Button>
-                        {loginAndRegisterButtons || logoutButton}
+                        {loginAndRegisterButtons}
                         {adminPanelButton}
+                        {userMenu}
                     </Box>
                 </Toolbar>
             </AppBar>

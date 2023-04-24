@@ -6,6 +6,7 @@ import DaysOfEating from "../components/DaysOfEating";
 import LoginForm from "../components/LoginForm";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AdminPage from "../components/AdminPage";
+import PersonalInfoForm from "../components/PersonalInfoForm";
 
 const PageRouting = () => (
     <Routes>
@@ -14,6 +15,7 @@ const PageRouting = () => (
         <Route path="/meals" element={<Meals/>}/>
         <Route path="/days" element={<DaysOfEating/>}/>
         <Route path="/login" element={<LoginForm/>}/>
+        <Route path="/personal" element={<PersonalInfoForm/>}/>
         <Route path="/admin" element={
             <ProtectedRoute roles={["ADMIN"]}>
                 <AdminPage/>

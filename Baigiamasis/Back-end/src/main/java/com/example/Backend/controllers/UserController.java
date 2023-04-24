@@ -63,6 +63,7 @@ public class UserController {
         User user = authenticate(loginRequest);
 
         return new LoginResponse(generateJwt(user), UserDto.builder()
+                .id(user.getId())
                 .email(user.getEmail())
                 .roles(user.getRoles().stream()
                         .map(Role::getRole)

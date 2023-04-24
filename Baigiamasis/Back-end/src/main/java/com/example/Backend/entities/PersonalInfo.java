@@ -36,10 +36,14 @@ public class PersonalInfo {
     @Column(name = "age")
     private BigInteger age;
 
+    @Min(0)
+    @Max(300)
     @Digits(integer = 3, fraction = 2)
     @Column(name = "height")
     private BigDecimal height;
 
+    @Min(0)
+    @Max(700)
     @Digits(integer = 3, fraction = 2)
     @Column(name = "weight")
     private BigDecimal weight;

@@ -34,11 +34,8 @@ const personalInfoValidationSchema = Yup.object().shape({
         .required()
         .label("Weight"),
     bmi: Yup.number()
-        .positive("Must be a positive number!")
-        .min(0, ({min}) => `Minimum ${min} grams of protein!`)
-        .max(99, ({max}) => `Maximum ${max} grams of protein!`)
         .required()
-        .label("BMI"),
+
 })
 
 const personalInfo = {

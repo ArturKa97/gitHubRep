@@ -57,8 +57,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void addPersonalInfo(Long id, PersonalInfo personalInfo) {
         User user = getUserById(id);
-        personalInfo.setUser(user);
-        personalInfoRepository.save(personalInfo);
+        PersonalInfo existingPersonalInfo = personalInfoRepository.getPersonalInfoById(id);
+
+        if (existingPersonalInfo == null) {
+            personalInfo.setUser(user);
+            personalInfoRepository.save(personalInfo);
+        }
+        else {
+            existingPersonalInfo.setName(personalInfo.getName());
+            existingPersonalInfo.setSurname(personalInfo.getSurname());
+            existingPersonalInfo.setAge(personalInfo.getAge());
+            existingPersonalInfo.setHeight(personalInfo.getHeight());
+            existingPersonalInfo.setWeight(personalInfo.getWeight());
+            existingPersonalInfo.setBmi(personalInfo.getBmi());
+            personalInfoRepository.save(existingPersonalInfo);
+        }
     }
 
     @Override

@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import {Field, Form, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
+import HTTP from "../api";
+import {useSelector} from "react-redux";
 
 const personalInfoValidationSchema = Yup.object().shape({
     name: Yup.string()
@@ -38,17 +40,23 @@ const personalInfoValidationSchema = Yup.object().shape({
 
 })
 
-const personalInfo = {
-    name: '',
-    surname: '',
-    age: '',
-    height: '',
-    weight: '',
-    bmi: ''
-}
-
 const PersonalInfoForm = () => {
 
+    const user = useSelector(({userSlice}) => userSlice?.userDto);
+
+    const personalInfo = {
+        name: '',
+        surname: '',
+        age: '',
+        height: '',
+        weight: '',
+        bmi: ''
+    }
+
+    const addPersonalInfo = async (pInfo, userId) => {
+        await HTTP.post(`/user/${userId}`, pInfo);
+
+    };
 
     return (
         <>
@@ -63,6 +71,8 @@ const PersonalInfoForm = () => {
                     initialValues={personalInfo}
                     onSubmit={async (values, {setSubmitting}) => {
                         console.log(values)
+                        await addPersonalInfo(values, user.id)
+                        console.log("success")
                         setSubmitting(false)
                     }}
                     validationSchema={personalInfoValidationSchema}>

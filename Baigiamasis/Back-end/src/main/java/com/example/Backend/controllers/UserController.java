@@ -51,9 +51,14 @@ public class UserController {
         userService.removeRoleFromUser(id, roleToRemove);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/pInfo/{id}")
     public void addPersonalInfo(@RequestBody PersonalInfo personalInfo, @PathVariable(value = "id") Long id) {
         userService.addPersonalInfo(id, personalInfo);
+    }
+
+    @GetMapping("/pInfo/{id}")
+    public PersonalInfo getPersonalInfoById(@PathVariable(value = "id") Long id) {
+        return userService.getPersonalInfoById(id);
     }
 
 

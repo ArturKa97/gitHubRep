@@ -10,4 +10,5 @@ public interface UserService {
     void addRoleToUser (Long id, String roleToAdd);
     void removeRoleFromUser (Long id, String roleToRemove);
     void addPersonalInfo (Long id, PersonalInfo personalInfo);
+    PersonalInfo getPersonalInfoById(Long id);
 }

@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import * as React from 'react';
 import {useProducts} from "../api/productsApi";
 import {CircularProgress} from "@mui/material";
-import Button from "@mui/material/Button";
 import AddCard from "./AddCard"
 import {useState} from "react";
 import AddProductFormDialog from "./AddProductFormDialog";

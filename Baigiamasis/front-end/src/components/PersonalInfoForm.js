@@ -5,6 +5,8 @@ import * as React from "react";
 import * as Yup from 'yup'
 import HTTP from "../api";
 import {useSelector} from "react-redux";
+import {useQuery} from "react-query";
+import {useState} from "react";
 
 const personalInfoValidationSchema = Yup.object().shape({
     name: Yup.string()
@@ -44,19 +46,36 @@ const PersonalInfoForm = () => {
 
     const user = useSelector(({userSlice}) => userSlice?.userDto);
 
-    const personalInfo = {
+    const addPersonalInfo = async (pInfo, userId) => {
+        await HTTP.post(`/user/pInfo/${userId}`, pInfo);
+    };
+
+    const getPersonalInfo = (userId) =>
+        HTTP.get(`/user/pInfo/${userId}`)
+            .then(response => response.data);
+
+    const usePersonalInfo = (id) => {
+        const context = useQuery(['getPersonalInfo', id], () => getPersonalInfo(id))
+        return {...context, pInfo: context.data}
+    }
+    const {pInfo} = usePersonalInfo(user.id);
+
+    const personalInfo = pInfo ? {
+        name: pInfo.name,
+        surname: pInfo.surname,
+        age: pInfo.age,
+        height: pInfo.height,
+        weight: pInfo.weight,
+        bmi: pInfo.bmi
+    } : {
         name: '',
         surname: '',
         age: '',
         height: '',
         weight: '',
         bmi: ''
+
     }
-
-    const addPersonalInfo = async (pInfo, userId) => {
-        await HTTP.post(`/user/pInfo/${userId}`, pInfo);
-
-    };
 
     return (
         <>

@@ -54,7 +54,7 @@ const PersonalInfoForm = () => {
     }
 
     const addPersonalInfo = async (pInfo, userId) => {
-        await HTTP.post(`/user/${userId}`, pInfo);
+        await HTTP.post(`/user/pInfo/${userId}`, pInfo);
 
     };
 

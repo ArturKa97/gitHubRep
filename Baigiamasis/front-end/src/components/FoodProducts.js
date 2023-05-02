@@ -18,7 +18,8 @@ const FoodProducts = () => {
 
 
     const foodProductsElement = products.map((listProduct, i) => (
-        <FoodProductCard key={i} product={listProduct} refetchProducts={refetch} openAlert={setAlertOpen} productToEdit={setEditProduct}
+        <FoodProductCard key={i} product={listProduct} refetchProducts={refetch} openAlert={setAlertOpen}
+                         productToEdit={setEditProduct}
                          openForm={setOpenFormDialog}/>
     ));
     const loadingElement = isFetching && (
@@ -47,7 +48,8 @@ const FoodProducts = () => {
                                       onClose={() => setOpenFormDialog(false)} product={editProduct}/>
                 {loadingElement || noProductElement || foodProductsElement}
             </Box>
-            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"info"} message={"Product deleted!"}/>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"info"}
+                           message={"Product deleted!"}/>
         </>
     )
 }

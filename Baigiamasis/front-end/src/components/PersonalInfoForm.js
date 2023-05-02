@@ -1,12 +1,15 @@
 import {Button, TextField} from "@mui/material";
-import Box from "@mui/material/Box";
 import {Field, Form, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
 import HTTP from "../api";
 import {useSelector} from "react-redux";
-import {useQuery} from "react-query";
 import {useState} from "react";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import SnackbarAlert from "./SnackbarAlert";
 
 const personalInfoValidationSchema = Yup.object().shape({
     name: Yup.string()
@@ -42,23 +45,17 @@ const personalInfoValidationSchema = Yup.object().shape({
 
 })
 
-const PersonalInfoForm = () => {
-
+const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
+    const [alertOpen, setAlertOpen] = useState(false);
     const user = useSelector(({userSlice}) => userSlice?.userDto);
 
     const addPersonalInfo = async (pInfo, userId) => {
         await HTTP.post(`/user/pInfo/${userId}`, pInfo);
     };
 
-    const getPersonalInfo = (userId) =>
-        HTTP.get(`/user/pInfo/${userId}`)
-            .then(response => response.data);
-
-    const usePersonalInfo = (id) => {
-        const context = useQuery(['getPersonalInfo', id], () => getPersonalInfo(id))
-        return {...context, pInfo: context.data}
-    }
-    const {pInfo} = usePersonalInfo(user.id);
+    const title = pInfo ? "Edit Personal Info" : "Add Personal Info"
+    const buttonName =  pInfo ? "Edit" : "Add"
+    const message = pInfo ? "Personal info edited!":  "Personal Info added!"
 
     const personalInfo = pInfo ? {
         name: pInfo.name,
@@ -79,79 +76,82 @@ const PersonalInfoForm = () => {
 
     return (
         <>
-            <Box
-                noValidate
-                autoComplete="off"
-                sx={{
-                    width: 300
-                }}
-            >
+            <Dialog open={open} onClose={onClose}>
+                <DialogTitle>{title}</DialogTitle>
                 <Formik
                     initialValues={personalInfo}
                     onSubmit={async (values, {setSubmitting}) => {
-                        console.log(values)
                         await addPersonalInfo(values, user.id)
-                        console.log("success")
                         setSubmitting(false)
+                        onClose()
+                        refetch()
+                        setAlertOpen(true)
                     }}
                     validationSchema={personalInfoValidationSchema}>
-                    {({errors, touched}) => (
-                        <Form>
-                            <Field id="name"
-                                   name="name"
-                                   label="Name"
-                                   variant="standard"
-                                   error={!!errors.name && touched.name}
-                                   helperText={touched.name && errors.name}
-                                   as={TextField}
-                            />
-                            <Field id="surname"
-                                   name="surname"
-                                   label="Surname"
-                                   variant="standard"
-                                   error={!!errors.surname && touched.surname}
-                                   helperText={touched.surname && errors.surname}
-                                   as={TextField}
-                            />
-                            <Field id="age"
-                                   name="age"
-                                   label="Age"
-                                   variant="standard"
-                                   error={!!errors.age && touched.age}
-                                   helperText={touched.age && errors.age}
-                                   as={TextField}
-                            />
-                            <Field id="weight"
-                                   name="weight"
-                                   label="Weight"
-                                   variant="standard"
-                                   error={!!errors.weight && touched.weight}
-                                   helperText={touched.weight && errors.weight}
-                                   as={TextField}
-                            />
-                            <Field id="height"
-                                   name="height"
-                                   label="Height"
-                                   variant="standard"
-                                   error={!!errors.height && touched.height}
-                                   helperText={touched.height && errors.height}
-                                   as={TextField}
-                            />
-                            <Field id="bmi"
-                                   name="bmi"
-                                   label="BMI"
-                                   variant="standard"
-                                   error={!!errors.bmi && touched.bmi}
-                                   helperText={touched.bmi && errors.bmi}
-                                   as={TextField}
-                            />
-                            <Button type="submit" sx={{
-                                marginTop: 2
-                            }} variant="contained">Submit</Button>
-                        </Form>
-                    )}
+                    {({errors, touched, submitForm}) => {
+                        return (
+                            <>
+                                <DialogContent>
+                                    <Field id="name"
+                                           name="name"
+                                           label="Name"
+                                           variant="standard"
+                                           error={!!errors.name && touched.name}
+                                           helperText={touched.name && errors.name}
+                                           as={TextField}
+                                    />
+                                    <Field id="surname"
+                                           name="surname"
+                                           label="Surname"
+                                           variant="standard"
+                                           error={!!errors.surname && touched.surname}
+                                           helperText={touched.surname && errors.surname}
+                                           as={TextField}
+                                    />
+                                    <Field id="age"
+                                           name="age"
+                                           label="Age"
+                                           variant="standard"
+                                           error={!!errors.age && touched.age}
+                                           helperText={touched.age && errors.age}
+                                           as={TextField}
+                                    />
+                                    <Field id="weight"
+                                           name="weight"
+                                           label="Weight"
+                                           variant="standard"
+                                           error={!!errors.weight && touched.weight}
+                                           helperText={touched.weight && errors.weight}
+                                           as={TextField}
+                                    />
+                                    <Field id="height"
+                                           name="height"
+                                           label="Height"
+                                           variant="standard"
+                                           error={!!errors.height && touched.height}
+                                           helperText={touched.height && errors.height}
+                                           as={TextField}
+                                    />
+                                    <Field id="bmi"
+                                           name="bmi"
+                                           label="BMI"
+                                           variant="standard"
+                                           error={!!errors.bmi && touched.bmi}
+                                           helperText={touched.bmi && errors.bmi}
+                                           as={TextField}
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button type="submit" sx={{
+                                        marginTop: 2
+                                    }} variant="contained" onClick={submitForm}>{buttonName}</Button>
+                                </DialogActions>
+                            </>
+                        )
+                    }}
                 </Formik>
-            </Box>
+            </Dialog>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={message}/>
         </>
     )
 }

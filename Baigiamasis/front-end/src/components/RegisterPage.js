@@ -3,11 +3,11 @@ import Box from "@mui/material/Box";
 import {Field, Form, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
-import {login} from "../api/usersApi";
-import {useDispatch} from "react-redux";
-import {userLoggedIn} from "../store/slices/userSlice";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import {createUser} from "../api/usersApi";
+import SnackbarAlert from "./SnackbarAlert";
+import {useState} from "react";
 
 const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -17,12 +17,11 @@ const loginValidationSchema = Yup.object().shape({
         .required()
 })
 
-const LoginForm = () => {
+const RegisterPage = () => {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const location = useLocation();
-
+    const userToRegister = createUser;
+    const [alertOpen, setAlertOpen] = useState(false);
+    const message = "User registered!";
     return (
         <>
             <Box
@@ -33,7 +32,7 @@ const LoginForm = () => {
                 }}
             >
                 <Typography variant="h6" gutterBottom>
-                    LOGIN
+                    REGISTER
                 </Typography>
                 <Formik
                     initialValues={{
@@ -41,13 +40,10 @@ const LoginForm = () => {
                         password: ''
                     }}
                     onSubmit={async (values, {setSubmitting}) => {
-                        console.log("login data", values)
-                        const user = await login(values)
-                        console.log("user", user)
-                        dispatch(userLoggedIn(user))
+                        console.log("register data", values)
+                        await userToRegister(values)
                         setSubmitting(false)
-                        // navigate to defined from location or to default index page
-                        navigate(location.state?.from || "/")
+                        setAlertOpen(true)
                     }}
                     validationSchema={loginValidationSchema}>
                     {({errors, touched}) => (
@@ -73,14 +69,15 @@ const LoginForm = () => {
                             />
                             <Button type="submit" sx={{
                                 marginTop: 2
-                            }} variant="contained">Login</Button>
+                            }} variant="contained">Register</Button>
                         </Form>
                     )}
                 </Formik>
             </Box>
+            <SnackbarAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} type={"success"} message={message}/>
         </>
     )
 }
 
 
-export default LoginForm
+export default RegisterPage

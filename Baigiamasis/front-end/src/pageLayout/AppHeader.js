@@ -75,7 +75,7 @@ const AppHeader = () => {
                             color="inherit"
                             variant="h6"
                             underline="none"
-                            onClick={() => navigate("/foodproducts")}
+                            onClick={() => navigate("/products")}
                             sx={rightLink}
                         >
                             {'Food Products'}

@@ -27,6 +27,7 @@ const PersonalInfoPage = () => {
         name: pInfo.name,
         surname: pInfo.surname,
         age: pInfo.age,
+        gender: pInfo.gender,
         height: pInfo.height,
         weight: pInfo.weight,
         bmi: pInfo.bmi
@@ -34,6 +35,7 @@ const PersonalInfoPage = () => {
         name: '',
         surname: '',
         age: '',
+        gender: '',
         height: '',
         weight: '',
         bmi: ''
@@ -55,6 +57,9 @@ const PersonalInfoPage = () => {
             </Typography>
             <Typography variant="h7" gutterBottom>
                 Age: {personalInfo.age} <br/>
+            </Typography>
+            <Typography variant="h7" gutterBottom>
+                Gender: {personalInfo.gender} <br/>
             </Typography>
             <Typography variant="h7" gutterBottom>
                 Height: {personalInfo.height} cm <br/>

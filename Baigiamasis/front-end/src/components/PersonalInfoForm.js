@@ -1,5 +1,11 @@
-import {Button, TextField} from "@mui/material";
-import {Field, Form, Formik} from "formik";
+import {
+    Button,
+    FormControl, FormHelperText,
+    InputLabel,
+    Select,
+    TextField
+} from "@mui/material";
+import {Field, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
 import HTTP from "../api";
@@ -10,6 +16,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import SnackbarAlert from "./SnackbarAlert";
+import MenuItem from "@mui/material/MenuItem";
 
 const personalInfoValidationSchema = Yup.object().shape({
     name: Yup.string()
@@ -28,6 +35,10 @@ const personalInfoValidationSchema = Yup.object().shape({
         .max(120, ({max}) => `Maximum ${max} years of age!`)
         .required()
         .label("Age"),
+    gender: Yup.string()
+        .required(({label}) =>`${label} is required`)
+        .oneOf(["Male","Female"])
+        .label("Gender"),
     height: Yup.number()
         .positive("Must be a positive number!")
         .min(0, ({min}) => `Minimum ${min} cm height!`)
@@ -54,13 +65,14 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
     };
 
     const title = pInfo ? "Edit Personal Info" : "Add Personal Info"
-    const buttonName =  pInfo ? "Edit" : "Add"
-    const message = pInfo ? "Personal info edited!":  "Personal Info added!"
+    const buttonName = pInfo ? "Edit" : "Add"
+    const message = pInfo ? "Personal info edited!" : "Personal Info added!"
 
     const personalInfo = pInfo ? {
         name: pInfo.name,
         surname: pInfo.surname,
         age: pInfo.age,
+        gender: pInfo.gender,
         height: pInfo.height,
         weight: pInfo.weight,
         bmi: pInfo.bmi
@@ -68,10 +80,10 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
         name: '',
         surname: '',
         age: '',
+        gender: '',
         height: '',
         weight: '',
         bmi: ''
-
     }
 
     return (
@@ -88,7 +100,7 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
                         setAlertOpen(true)
                     }}
                     validationSchema={personalInfoValidationSchema}>
-                    {({errors, touched, submitForm}) => {
+                    {({errors, touched, submitForm, values,handleBlur,setFieldValue}) => {
                         return (
                             <>
                                 <DialogContent>
@@ -116,6 +128,27 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
                                            helperText={touched.age && errors.age}
                                            as={TextField}
                                     />
+                                    <FormControl
+                                        fullWidth
+                                        size="small"
+                                        id="gender"
+                                        error={!!errors.gender && touched.gender}
+                                    >
+                                        <InputLabel id="gender">Gender</InputLabel>
+                                        <Select
+                                            id="gender"
+                                            label="Gender"
+                                            name="gender"
+                                            value={values.gender}
+                                            onBlur={handleBlur}
+                                            onChange={(e) => setFieldValue('gender', e.target.value)}
+                                            error={!!errors.gender && touched.gender}
+                                        >
+                                            <MenuItem value={'Male'}>Male</MenuItem>
+                                            <MenuItem value={'Female'}>Female</MenuItem>
+                                        </Select>
+                                        <FormHelperText sx={{ color: 'error.main' }}>{errors.gender}</FormHelperText>
+                                    </FormControl>
                                     <Field id="weight"
                                            name="weight"
                                            label="Weight"

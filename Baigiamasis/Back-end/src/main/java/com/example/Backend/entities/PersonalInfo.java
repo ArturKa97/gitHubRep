@@ -32,6 +32,10 @@ public class PersonalInfo {
     @Column(name = "surname")
     private String surname;
 
+    @NotBlank
+    @Column(name = "gender")
+    private String gender;
+
     @Min(0)
     @Max(120)
     @Column(name = "age")

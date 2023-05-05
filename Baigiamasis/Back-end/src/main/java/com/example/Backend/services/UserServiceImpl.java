@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             existingPersonalInfo.setName(personalInfo.getName());
             existingPersonalInfo.setSurname(personalInfo.getSurname());
             existingPersonalInfo.setAge(personalInfo.getAge());
+            existingPersonalInfo.setGender(personalInfo.getGender());
             existingPersonalInfo.setHeight(personalInfo.getHeight());
             existingPersonalInfo.setWeight(personalInfo.getWeight());
             existingPersonalInfo.setBmi(personalInfo.getBmi());

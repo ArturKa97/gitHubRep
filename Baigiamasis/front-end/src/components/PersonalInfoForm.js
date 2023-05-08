@@ -108,7 +108,7 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
                         setAlertOpen(true)
                     }}
                     validationSchema={personalInfoValidationSchema}>
-                    {({errors, touched, submitForm, values,handleBlur,setFieldValue}) => {
+                    {({errors, touched,isSubmitting,  submitForm, values,handleBlur,setFieldValue}) => {
                         return (
                             <>
                                 <DialogContent>
@@ -175,7 +175,7 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
                                     />
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button type="submit" sx={{
+                                    <Button type="submit" disabled={isSubmitting} sx={{
                                         marginTop: 2
                                     }} variant="contained" onClick={submitForm}>{buttonName}</Button>
                                 </DialogActions>

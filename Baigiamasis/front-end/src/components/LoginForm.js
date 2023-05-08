@@ -1,6 +1,6 @@
 import {Button, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
-import {Field, Form, Formik} from "formik";
+import {Field, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
 import {login} from "../api/usersApi";
@@ -50,8 +50,8 @@ const LoginForm = () => {
                         navigate(location.state?.from || "/")
                     }}
                     validationSchema={loginValidationSchema}>
-                    {({errors, touched}) => (
-                        <Form>
+                    {({errors, touched, isSubmitting, submitForm}) => (
+                        <>
                             <Field id="email"
                                    name="email"
                                    label="Email"
@@ -71,10 +71,11 @@ const LoginForm = () => {
                                    helperText={touched.password && errors.password}
                                    as={TextField}
                             />
-                            <Button type="submit" sx={{
-                                marginTop: 2
-                            }} variant="contained">Login</Button>
-                        </Form>
+                            <Button type="submit" disabled={isSubmitting} onClick={submitForm}
+                                    sx={{
+                                        marginTop: 2
+                                    }} variant="contained">Login</Button>
+                        </>
                     )}
                 </Formik>
             </Box>

@@ -6,6 +6,8 @@ import {useQuery} from "react-query";
 import {Button} from "@mui/material";
 import {useState} from "react";
 import PersonalInfoForm from "./PersonalInfoForm";
+import Tooltip from "@mui/material/Tooltip";
+import HelpIcon from '@mui/icons-material/Help';
 
 const PersonalInfoPage = () => {
 
@@ -67,9 +69,13 @@ const PersonalInfoPage = () => {
             <Typography variant="h7" gutterBottom>
                 Weight: {personalInfo.weight} kg<br/>
             </Typography>
-            <Typography variant="h7" gutterBottom>
-                BMI: {personalInfo.bmi} <br/>
-            </Typography>
+                <Typography variant="h7" gutterBottom>
+                    BMI: {personalInfo.bmi}
+                </Typography>
+            <Tooltip title="BMI-Body Mass Index will be calculated automatically once the personal info fields are filled.">
+                <HelpIcon/>
+            </Tooltip>
+            <br/>
             <Button variant="outlined" onClick={() =>
                 setOpenFormDialog(true)}>
                 {buttonName}

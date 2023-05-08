@@ -1,7 +1,7 @@
 import {
     Button,
     FormControl, FormHelperText,
-    InputLabel,
+    InputLabel, LinearProgress,
     Select,
     TextField
 } from "@mui/material";
@@ -17,6 +17,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import SnackbarAlert from "./SnackbarAlert";
 import MenuItem from "@mui/material/MenuItem";
+import Box from "@mui/material/Box";
 
 const personalInfoValidationSchema = Yup.object().shape({
     name: Yup.string()
@@ -174,6 +175,7 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
                                            as={TextField}
                                     />
                                 </DialogContent>
+                                {isSubmitting && <Box sx={{width: '80%', height: '100%'}}><LinearProgress/></Box>}
                                 <DialogActions>
                                     <Button type="submit" disabled={isSubmitting} sx={{
                                         marginTop: 2

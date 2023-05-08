@@ -1,4 +1,4 @@
-import {Button, TextField} from "@mui/material";
+import {Button, LinearProgress, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import {Field, Formik} from "formik";
 import * as React from "react";
@@ -71,6 +71,7 @@ const LoginForm = () => {
                                    helperText={touched.password && errors.password}
                                    as={TextField}
                             />
+                            {isSubmitting && <Box sx={{width: '80%', height: '100%'}}><LinearProgress/></Box>}
                             <Button type="submit" disabled={isSubmitting} onClick={submitForm}
                                     sx={{
                                         marginTop: 2

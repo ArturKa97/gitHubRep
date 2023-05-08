@@ -51,8 +51,6 @@ const personalInfoValidationSchema = Yup.object().shape({
         .max(700, ({max}) => `Maximum ${max} kg weight!`)
         .required()
         .label("Weight"),
-    bmi: Yup.number()
-        .required()
 
 })
 
@@ -86,14 +84,24 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
         bmi: ''
     }
 
+    const calculateBmi = (values) => {
+        const heightM = (values.height/100);
+        const heightSqM = heightM*heightM;
+        const bmi = (values.weight)/(heightSqM);
+        const bmiRounded = bmi.toFixed(1)
+        return bmiRounded;
+    }
+
     return (
         <>
             <Dialog open={open} onClose={onClose}>
                 <DialogTitle>{title}</DialogTitle>
                 <Formik
                     initialValues={personalInfo}
-                    onSubmit={async (values, {setSubmitting}) => {
-                        await addPersonalInfo(values, user.id)
+                    onSubmit={async (values, {setSubmitting , setFieldValue}) => {
+                        const bmi = calculateBmi(values)
+                        setFieldValue("bmi", bmi)
+                        await addPersonalInfo({...values,bmi }, user.id)
                         setSubmitting(false)
                         onClose()
                         refetch()
@@ -163,14 +171,6 @@ const PersonalInfoForm = ({open, onClose, pInfo, refetch}) => {
                                            variant="standard"
                                            error={!!errors.height && touched.height}
                                            helperText={touched.height && errors.height}
-                                           as={TextField}
-                                    />
-                                    <Field id="bmi"
-                                           name="bmi"
-                                           label="BMI"
-                                           variant="standard"
-                                           error={!!errors.bmi && touched.bmi}
-                                           helperText={touched.bmi && errors.bmi}
                                            as={TextField}
                                     />
                                 </DialogContent>

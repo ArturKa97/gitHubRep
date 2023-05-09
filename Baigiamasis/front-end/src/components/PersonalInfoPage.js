@@ -5,7 +5,7 @@ import HTTP from "../api";
 import {useQuery} from "react-query";
 import {Button} from "@mui/material";
 import {useState} from "react";
-import PersonalInfoForm from "./PersonalInfoForm";
+import PersonalInfoForm from "./forms/PersonalInfoForm";
 import Tooltip from "@mui/material/Tooltip";
 import HelpIcon from '@mui/icons-material/Help';
 

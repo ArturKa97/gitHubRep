@@ -8,14 +8,14 @@ import {
 import {Field, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
-import HTTP from "../api";
+import HTTP from "../../api";
 import {useSelector} from "react-redux";
 import {useState} from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import SnackbarAlert from "./SnackbarAlert";
+import SnackbarAlert from "../SnackbarAlert";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 

@@ -5,13 +5,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as Yup from "yup";
-import {useCreateProduct} from "../api/productsApi";
+import {useCreateProduct} from "../../api/productsApi";
 import {useState} from "react";
 import {Field, Formik} from "formik";
 import TextField from "@mui/material/TextField";
 import {Alert, LinearProgress, Snackbar} from "@mui/material";
 import Box from "@mui/material/Box";
-import SnackbarAlert from "./SnackbarAlert";
+import SnackbarAlert from "../SnackbarAlert";
 
 const validationSchema = Yup.object().shape({
         productName: Yup.string()

@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import {Field, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
-import {login} from "../api/usersApi";
+import {login} from "../../api/usersApi";
 import {useDispatch} from "react-redux";
-import {userLoggedIn} from "../store/slices/userSlice";
+import {userLoggedIn} from "../../store/slices/userSlice";
 import {useLocation, useNavigate} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 

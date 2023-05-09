@@ -5,7 +5,7 @@ import {CircularProgress} from "@mui/material";
 import {useMeals} from "../api/mealsApi";
 import AddCard from "./cards/AddCard";
 import {useState} from "react";
-import AddMealFormDialog from "./AddMealFormDialog";
+import AddMealFormDialog from "./forms/AddMealFormDialog";
 import SnackbarAlert from "./SnackbarAlert";
 import Typography from "@mui/material/Typography";
 

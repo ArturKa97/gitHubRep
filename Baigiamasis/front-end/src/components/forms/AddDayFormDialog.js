@@ -10,15 +10,15 @@ import {Field, Formik} from "formik";
 import TextField from "@mui/material/TextField";
 import {LinearProgress} from "@mui/material";
 import Box from "@mui/material/Box";
-import {useCreateMeal} from "../api/mealsApi";
-import SnackbarAlert from "./SnackbarAlert";
+import SnackbarAlert from "../SnackbarAlert";
+import {useAddDayOfEating} from "../../api/dayOfEatingApi";
 
 const validationSchema = Yup.object().shape({
-        mealName: Yup.string()
+        dayOfEatingName: Yup.string()
             .min(2, ({label, min}) => `${label} must contain more than ${min} chars!`)
             .max(20, ({label, max}) => `${label} must contain less than ${max} chars!`)
             .required()
-            .label("Meal name"),
+            .label("Day name"),
         description: Yup.string()
             .min(2, ({label, min}) => `${label} must contain more than ${min} chars!`)
             .max(100, ({label, max}) => `${label} must contain less than ${max} chars!`)
@@ -27,31 +27,31 @@ const validationSchema = Yup.object().shape({
     }
 )
 
-const AddMealFormDialog = ({refetchItems, open, onClose, meal}) => {
-    const mealValues = meal ?
+const AddDayFormDialog = ({refetchItems, open, onClose, dayOfEating}) => {
+    const dayValues = dayOfEating ?
         {
-            id: meal.id,
-            mealName: meal.name,
-            description: meal.description
+            id: dayOfEating.id,
+            dayOfEatingName: dayOfEating.name,
+            description: dayOfEating.description
         } : {
             id: null,
-            mealName: '',
+            dayOfEatingName: '',
             description: ''
         }
-    const addMeal = useCreateMeal();
     const [alertOpen, setAlertOpen] = useState(false);
+    const addDayOfEating = useAddDayOfEating();
 
-    const title = meal ? "Edit Meal" : "Add New Meal"
-    const buttonName = meal ? "Edit" : "Add"
-    const message = meal ? "Meal edited!" : "Meal added!"
+    const title = dayOfEating ? "Edit Day" : "Add New Day"
+    const buttonName = dayOfEating ? "Edit" : "Add"
+    const message = dayOfEating ? "Day edited!" : "Day added!"
 
     return (
         <>
             <Dialog open={open} onClose={onClose}>
                 <DialogTitle>{title}</DialogTitle>
-                <Formik initialValues={mealValues}
-                        onSubmit={async (mealValues, {setSubmitting}) => {
-                            await addMeal(mealValues)
+                <Formik initialValues={dayValues}
+                        onSubmit={async (dayValues, {setSubmitting}) => {
+                            await addDayOfEating(dayValues)
                             setSubmitting(false)
                             onClose()
                             refetchItems()
@@ -63,11 +63,11 @@ const AddMealFormDialog = ({refetchItems, open, onClose, meal}) => {
                             <>
                                 <DialogContent>
                                     <Field
-                                        name="mealName"
-                                        label="Meal name"
-                                        placeholder="Meal name"
-                                        error={!!errors.mealName && touched.mealName}
-                                        helperText={touched.mealName && errors["mealName"]}
+                                        name="dayOfEatingName"
+                                        label="Day name"
+                                        placeholder="Day name"
+                                        error={!!errors.dayOfEatingName && touched.dayOfEatingName}
+                                        helperText={touched.dayOfEatingName && errors["dayOfEatingName"]}
                                         as={TextField}
 
                                     />
@@ -96,4 +96,4 @@ const AddMealFormDialog = ({refetchItems, open, onClose, meal}) => {
         </>
     );
 }
-export default AddMealFormDialog
+export default AddDayFormDialog

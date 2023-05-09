@@ -5,8 +5,8 @@ import * as React from "react";
 import * as Yup from 'yup'
 import {useNavigate} from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import {createUser} from "../api/usersApi";
-import SnackbarAlert from "./SnackbarAlert";
+import {createUser} from "../../api/usersApi";
+import SnackbarAlert from "../SnackbarAlert";
 import {useState} from "react";
 
 const loginValidationSchema = Yup.object().shape({
@@ -17,7 +17,7 @@ const loginValidationSchema = Yup.object().shape({
         .required()
 })
 
-const RegisterPage = () => {
+const RegisterForm = () => {
 
     const userToRegister = createUser;
     const [alertOpen, setAlertOpen] = useState(false);
@@ -80,4 +80,4 @@ const RegisterPage = () => {
 }
 
 
-export default RegisterPage
+export default RegisterForm

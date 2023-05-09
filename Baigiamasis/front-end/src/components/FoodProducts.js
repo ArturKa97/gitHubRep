@@ -5,7 +5,7 @@ import {useProducts} from "../api/productsApi";
 import {CircularProgress} from "@mui/material";
 import AddCard from "./cards/AddCard"
 import {useState} from "react";
-import AddProductFormDialog from "./AddProductFormDialog";
+import AddProductFormDialog from "./forms/AddProductFormDialog";
 import SnackbarAlert from "./SnackbarAlert";
 import Typography from "@mui/material/Typography";
 

@@ -7,7 +7,7 @@ import SnackbarAlert from "./SnackbarAlert";
 import Typography from "@mui/material/Typography";
 import {useDaysOfEating} from "../api/dayOfEatingApi";
 import DayOfEatingCard from "./cards/DayOfEatingCard";
-import AddDayFormDialog from "./AddDayFormDialog";
+import AddDayFormDialog from "./forms/AddDayFormDialog";
 
 const DaysOfEating = () => {
     const {isFetching, refetch, daysOfEating = []} = useDaysOfEating();

@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {userLoggedOut} from "../store/slices/userSlice";
 import IconButton from "@mui/material/IconButton";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import UserAccountMenu from "../components/UserAccountMenu";
+import UserAccountMenu from "../components/actionMenus/UserAccountMenu";
 
 const rightLink = {
     fontSize: 16,

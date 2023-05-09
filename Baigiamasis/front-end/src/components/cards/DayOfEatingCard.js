@@ -16,7 +16,7 @@ import HTTP from "../../api";
 import {useMeals} from "../../api/mealsApi";
 import AddMealSearchDialog from "../searchBars/AddMealSearchDialog";
 import RemoveMealSearchDialog from "../searchBars/RemoveMealSearchDialog";
-import DayOfEatingActionMenu from "../DayOfEatingActionMenu";
+import DayOfEatingActionMenu from "../actionMenus/DayOfEatingActionMenu";
 
 const ExpandMore = styled((props) => {
     const {expand, ...other} = props;

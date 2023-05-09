@@ -9,7 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import {useState} from "react";
 import {Avatar} from "@mui/material";
-import {userLoggedOut} from "../store/slices/userSlice";
+import {userLoggedOut} from "../../store/slices/userSlice";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 

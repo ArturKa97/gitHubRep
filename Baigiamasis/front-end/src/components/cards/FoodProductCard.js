@@ -7,7 +7,7 @@ import {CardActionArea} from '@mui/material';
 import NutritionListItem from "../NutritionListItem";
 import Box from "@mui/material/Box";
 import CardHeader from "@mui/material/CardHeader";
-import FoodActionMenu from "../FoodActionMenu";
+import FoodActionMenu from "../actionMenus/FoodActionMenu";
 import HTTP from "../../api";
 
 

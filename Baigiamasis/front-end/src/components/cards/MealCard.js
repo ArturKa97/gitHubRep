@@ -13,7 +13,7 @@ import {useState} from "react";
 import NutritionListItem from "../NutritionListItem";
 import Box from "@mui/material/Box";
 import HTTP from "../../api";
-import MealActionMenu from "../MealActionMenu";
+import MealActionMenu from "../actionMenus/MealActionMenu";
 import {useProducts} from "../../api/productsApi";
 import AddProductSearchDialog from "../searchBars/AddProductSearchDialog";
 import RemoveProductSearchDialog from "../searchBars/RemoveProductSearchDialog";

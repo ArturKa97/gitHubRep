@@ -23,6 +23,7 @@ public class FoodProduct {
 
     @NotBlank
     @Column(name = "name")
+    @EqualsAndHashCode.Exclude
     private String name;
 
 
@@ -30,30 +31,35 @@ public class FoodProduct {
     @Min(0)
     @Max(1000)
     @Column(name = "calories")
+    @EqualsAndHashCode.Exclude
     private BigInteger calories;
 
 
     @PositiveOrZero
     @Digits(integer = 2, fraction = 2)
     @Column(name = "protein")
+    @EqualsAndHashCode.Exclude
     private BigDecimal protein;
 
 
     @PositiveOrZero
     @Digits(integer = 2, fraction = 2)
     @Column(name = "carbs")
+    @EqualsAndHashCode.Exclude
     private BigDecimal carbs;
 
 
     @PositiveOrZero
     @Digits(integer = 2, fraction = 2)
     @Column(name = "sugar")
+    @EqualsAndHashCode.Exclude
     private BigDecimal sugar;
 
 
     @PositiveOrZero
     @Digits(integer = 2, fraction = 2)
     @Column(name = "fat")
+    @EqualsAndHashCode.Exclude
     private BigDecimal fat;
 
 }

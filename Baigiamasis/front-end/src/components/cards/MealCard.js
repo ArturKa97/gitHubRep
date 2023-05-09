@@ -10,13 +10,13 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useState} from "react";
-import NutritionListItem from "./NutritionListItem";
+import NutritionListItem from "../NutritionListItem";
 import Box from "@mui/material/Box";
-import HTTP from "../api";
-import MealActionMenu from "./MealActionMenu";
-import {useProducts} from "../api/productsApi";
-import AddProductSearchDialog from "./AddProductSearchDialog";
-import RemoveProductSearchDialog from "./RemoveProductSearchDialog";
+import HTTP from "../../api";
+import MealActionMenu from "../MealActionMenu";
+import {useProducts} from "../../api/productsApi";
+import AddProductSearchDialog from "../AddProductSearchDialog";
+import RemoveProductSearchDialog from "../RemoveProductSearchDialog";
 
 const ExpandMore = styled((props) => {
     const {expand, ...other} = props;

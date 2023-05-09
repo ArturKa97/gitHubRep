@@ -1,12 +1,12 @@
 import Box from "@mui/material/Box";
 import * as React from 'react';
 import {CircularProgress} from "@mui/material";
-import AddCard from "./AddCard";
+import AddCard from "./cards/AddCard";
 import {useState} from "react";
 import SnackbarAlert from "./SnackbarAlert";
 import Typography from "@mui/material/Typography";
 import {useDaysOfEating} from "../api/dayOfEatingApi";
-import DayOfEatingCard from "./DayOfEatingCard";
+import DayOfEatingCard from "./cards/DayOfEatingCard";
 import AddDayFormDialog from "./AddDayFormDialog";
 
 const DaysOfEating = () => {

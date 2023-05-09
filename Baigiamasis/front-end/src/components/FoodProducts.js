@@ -1,9 +1,9 @@
-import FoodProductCard from "./FoodProductCard";
+import FoodProductCard from "./cards/FoodProductCard";
 import Box from "@mui/material/Box";
 import * as React from 'react';
 import {useProducts} from "../api/productsApi";
 import {CircularProgress} from "@mui/material";
-import AddCard from "./AddCard"
+import AddCard from "./cards/AddCard"
 import {useState} from "react";
 import AddProductFormDialog from "./AddProductFormDialog";
 import SnackbarAlert from "./SnackbarAlert";

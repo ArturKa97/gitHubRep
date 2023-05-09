@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box";
 import * as React from 'react';
-import MealCard from "./MealCard";
+import MealCard from "./cards/MealCard";
 import {CircularProgress} from "@mui/material";
 import {useMeals} from "../api/mealsApi";
-import AddCard from "./AddCard";
+import AddCard from "./cards/AddCard";
 import {useState} from "react";
 import AddMealFormDialog from "./AddMealFormDialog";
 import SnackbarAlert from "./SnackbarAlert";

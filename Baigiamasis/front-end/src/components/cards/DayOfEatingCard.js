@@ -14,8 +14,8 @@ import NutritionListItem from "../NutritionListItem";
 import Box from "@mui/material/Box";
 import HTTP from "../../api";
 import {useMeals} from "../../api/mealsApi";
-import AddMealSearchDialog from "../AddMealSearchDialog";
-import RemoveMealSearchDialog from "../RemoveMealSearchDialog";
+import AddMealSearchDialog from "../searchBars/AddMealSearchDialog";
+import RemoveMealSearchDialog from "../searchBars/RemoveMealSearchDialog";
 import DayOfEatingActionMenu from "../DayOfEatingActionMenu";
 
 const ExpandMore = styled((props) => {

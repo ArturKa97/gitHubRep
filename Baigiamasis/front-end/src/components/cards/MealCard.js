@@ -15,8 +15,8 @@ import Box from "@mui/material/Box";
 import HTTP from "../../api";
 import MealActionMenu from "../MealActionMenu";
 import {useProducts} from "../../api/productsApi";
-import AddProductSearchDialog from "../AddProductSearchDialog";
-import RemoveProductSearchDialog from "../RemoveProductSearchDialog";
+import AddProductSearchDialog from "../searchBars/AddProductSearchDialog";
+import RemoveProductSearchDialog from "../searchBars/RemoveProductSearchDialog";
 
 const ExpandMore = styled((props) => {
     const {expand, ...other} = props;

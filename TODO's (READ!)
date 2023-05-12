@@ -1,0 +1,30 @@
+This is my personal project that i'm currently working on, there is still alot of work to be done, but i am slowly adding and improving things. The project consist of two parts, the Back-end which is Spring Boot, Java based and Front-end which is React.js based.
+Right now it's made to run either with SQL or H2, but currently the selected profile is H2 for a more convenient, simpler, project usage and viewing experience for others.
+
+INSTRUCTIONS:
+1. Download the project
+2. Open both parts of the project separetely.
+3. Download all dependencies in back and front end.
+4. Run the back-end first then the front-end.
+5. You can access the frontend with "localhost:3000/"
+6. You can access H2 console with "localhost:8080/h2" to see the user logins with different roles.
+7. Try it out :).
+
+TO DO's:
+1. Implement the ability to input how  many grams of each product/meal is in the meal/day and calculate the nutrition values accordingly.
+2. Implement error,exception catching in back-end and inform the user of the errors in the front-end.
+3. Convert remaining entities to DTO's.
+4. Add testing.
+5. Refactor the api functions with dynamic urls, so that they would be in the same place as the other functions.
+6. Implement a way to handle item deleting if it is already added to another item higher in hierarchy.
+7. Add a redirection to login page and an alert after succesful user registration.
+8. Implement image uploading by the user/admin.
+9. Protect the remaining needed routes.
+10. Distribute and accordingly hide/show features,components judging by what role the user has.
+11. Implement role management in the admin panel.
+12. Add recommendations to the user about the nutrition according to the user's goals.
+13. Implement the ability for a user to select the days and then graphically  represent all of the nutrition values throughout the selected days, so the user could see how is he doing according to the recommended nutrition values.
+14. Change the way of products/meals showing when adding them to meal/day, so that the ones that are already added would not be showing on the list.
+15. Tidy up and style the front end (forms, search bars, page contents ...)
+16. Cleaning up/ refactoring the code.
+17. ..........

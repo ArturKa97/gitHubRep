@@ -27,4 +27,5 @@ TO DO's:
 14. Change the way of products/meals showing when adding them to meal/day, so that the ones that are already added would not be showing on the list.
 15. Tidy up and style the front end (forms, search bars, page contents ...)
 16. Cleaning up/ refactoring the code.
-17. ..........
+17. Add I18N Lithuanian - English
+18. .....
